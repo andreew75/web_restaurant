@@ -1,0 +1,227 @@
+{% load static %}
+
+<header id="navbar-spy" class="header header-11 header-3 header-6 header-transparent header-fixed">
+        <nav id="primary-menu" class="navbar navbar-fixed-top">
+          <div class="container">
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse pull-left" id="navbar-collapse-2">
+              <ul class="nav navbar-nav nav-pos-right navbar-left">
+                <!-- Home Menu -->
+                <li class="has-dropdown mega-dropdown active">
+                  <a href="{% url 'home' %}" data-toggle="dropdown" class="dropdown-toggle menu-item">home</a>
+                </li>
+                <!-- li end -->
+
+                <!-- About Menu -->
+                <li class="has-dropdown">
+                  <a href="#" data-toggle="dropdown" class="dropdown-toggle menu-item">about</a>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a data-scroll="scrollTo" href="#banner5">our story</a>
+                    </li>
+                    <li>
+                      <a data-scroll="scrollTo" href="#team1">our chefs</a>
+                    </li>
+                    <li>
+                      <a data-scroll="scrollTo" href="#footer">contact us</a>
+                    </li>
+                  </ul>
+                </li>
+                <!-- li end -->
+
+                <!-- Menu Menu -->
+                <li>
+                  <a class="menu-item" href="{% url 'menu:list' %}">Menu</a>
+                </li>
+                <!-- li end -->
+
+                <!-- Features Menu-->
+                <li>
+                  <a class="menu-item" href="{% url 'events:list' %}">events</a>
+                </li>
+                <!-- li end -->
+              </ul>
+            </div>
+            <!-- .navbar-collapse -->
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-mobile" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="logo" href="{% url 'home' %}">
+                <img class="logo-light" src="{% static 'img/logo_min.png' %}" alt="saffron Logo">
+                <img class="logo-dark" src="{% static 'img/logo_min_black.png' %}" alt="saffron Logo">
+              </a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse pull-right" id="navbar-collapse-1">
+              <ul class="nav navbar-nav nav-pos-right navbar-left">
+                <li>
+                  <a class="menu-item" href="{% url 'gallery:list' %}">gallery</a>
+                </li>
+                <!-- li end -->
+
+                <!-- Blog Menu-->
+                <li>
+                  <a class="menu-item" href="{% url 'blog:list' %}">Blog</a>
+                </li>
+                <!-- li end -->
+
+                <li>
+                  <div class="module-container pull-right">
+                    <!-- Module Reservation  -->
+                    <div class="module module-reservation">
+
+                      <a class="btn-popup btn-popup-theme" data-toggle="modal" data-target="#reservationModule"><i class="lnr lnr-users"></i><span class="hidden-sm hidden-xs">Reservation</span></a>
+                      <div class="modal fade reservation-popup" tabindex="-1" role="dialog" id="reservationModule">
+                        <div class="modal-dialog modal-lg" role="document">
+                          <div class="modal-content">
+
+                            <div class="modal-body">
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>
+                              <div class="row reservation">
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                  <div class="reservation-form mb-30 bg-white text-center">
+                                    <form method="post" action="assets/php/reservation.php" class="reservationForm mb-0" novalidate="novalidate">
+                                      <div class="row">
+                                        <div class="col-xs-12 col-sm-12 col-md-4">
+                                          <div class="form-select">
+                                            <i class="fa fa-angle-down"></i>
+                                            <select class="form-control" name="headerpepole" id="headernum">
+                                              <option value="2">2 People</option>
+                                              <option value="3">3 People</option>
+                                              <option value="4">4 People</option>
+                                              <option value="5">5 People</option>
+                                              <option value="6">6 People</option>
+                                              <option value="8">8 People</option>
+                                              <option value="10">10 People</option>
+                                            </select>
+                                          </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-4">
+                                          <div class="form-select">
+                                            <i class="fa fa-angle-down"></i>
+                                            <select class="form-control" name="headerday" id="headerday">
+                                              <option value="March 23">March 23, 2017</option>
+                                              <option value="March 24">March 24, 2017</option>
+                                              <option value="March 25">March 25, 2017</option>
+                                              <option value="March 26">March 26, 2017</option>
+                                              <option value="March 27">March 27, 2017</option>
+                                            </select>
+                                          </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-4">
+                                          <div class="form-select">
+                                            <i class="fa fa-angle-down"></i>
+                                            <select class="form-control" name="headertime" id="headertime">
+                                              <option value="8:00">8:00 PM</option>
+                                              <option value="9:00">9:00 PM</option>
+                                              <option value="10:00">10:00 PM</option>
+                                              <option value="11:00">11:00 PM</option>
+                                              <option value="12:00">12:00 AM</option>
+                                            </select>
+                                          </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-4">
+                                          <input type="text" class="form-control" name="header-name" id="headername" placeholder="Your Name" required="" aria-required="true">
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-4">
+                                          <input type="email" class="form-control" name="header-email" id="headeremail" placeholder="Email">
+                                        </div>
+                                        <div class="col-md-4">
+                                          <input type="text" class="form-control" name="header-phone" id="headerphone" placeholder="Phone Number" required="" aria-required="true">
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12">
+                                          <textarea class="form-control" name="header-message" id="headermessage" rows="2" placeholder="Add a special request (optional)"></textarea>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12">
+                                          <input type="submit" value="Find Table" name="submit" class="btn btn--secondary btn--block">
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12">
+                                          <!--Alert Message-->
+                                          <div class="reservation-result"></div>
+                                        </div>
+                                      </div>
+                                      <!-- .row end -->
+                                    </form>
+                                    <!-- form end -->
+                                  </div>
+                                  <!-- .contact-form end -->
+                                </div>
+                                <!-- .col-md-8 end -->
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                  <div class="reservation-link text-center">
+                                    <span class="text-white">Reservation Powered by</span> <a href="#">Open table</a>
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- .row end -->
+                            </div>
+                          </div>
+                          <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                      </div>
+                      <!-- /.modal -->
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <!-- .navbar-collapse -->
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="navbar-collapse-mobile">
+              <ul class="nav navbar-nav nav-pos-right navbar-left  hidden-lg hidden-md">
+                <!-- Home Menu -->
+                <li class="has-dropdown mega-dropdown active">
+                  <a href="#" data-toggle="dropdown" class="dropdown-toggle menu-item">home</a>
+                </li>
+                <!-- li end -->
+
+                <!-- About Menu -->
+                <li class="has-dropdown">
+                  <a href="#" data-toggle="dropdown" class="dropdown-toggle menu-item">About</a>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a href="#banner5">our story</a>
+                    </li>
+                    <li>
+                      <a href="#team1">our chefs</a>
+                    </li>
+                    <li>
+                      <a href="#footer">contact us</a>
+                    </li>
+                  </ul>
+                </li>
+                <!-- li end -->
+
+                <!-- Menu Menu -->
+                <li class="has-dropdown">
+                  <a href="#" data-toggle="dropdown" class="dropdown-toggle menu-item">Menu</a>
+                </li>
+                <!-- li end -->
+
+                <!-- Features Menu-->
+                <li class="has-dropdown">
+                  <a href="#" data-toggle="dropdown" class="dropdown-toggle menu-item">features</a>
+                <li>
+                  <a class="menu-item" href="#">gallery</a>
+                </li>
+                <!-- li end -->
+
+                <!-- Blog Menu-->
+                <li class="has-dropdown">
+                  <a href="#" data-toggle="dropdown" class="dropdown-toggle menu-item">Blog</a>
+                </li>
+                <!-- li end -->
+              </ul>
+            </div>
+            <!-- .navbar-collapse -->
+          </div>
+          <!-- .container end  -->
+        </nav>
+</header>

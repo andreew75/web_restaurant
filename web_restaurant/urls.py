@@ -16,8 +16,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls.static import static
+from django.conf import settings
+from . import views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('menu.urls')),
-]
+    path('', views.home, name='home'),
+
+    path('menu/', include('menu.urls', namespace='menu')),
+    path('blog/', include('blog.urls', namespace='blog')),
+    path('events/', include('events.urls', namespace='events')),
+    path('gallery/', include('gallery.urls', namespace='gallery')),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

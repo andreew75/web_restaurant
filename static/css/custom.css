@@ -1,0 +1,325 @@
+divider--shape-1down {
+	width: 92px;
+	height: 20px;
+	background: url(static/shapes/arrow-down.png) center no-repeat;
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	margin-left: -46px;
+}
+
+.divider--shape-1down.divider--shape-gray {
+	background: url(static/shapes/arrow-down-gray.png) center no-repeat;
+}
+
+.divider--shape-1up {
+	width: 92px;
+	height: 20px;
+	background: url(static/shapes/arrow-up.png) center no-repeat;
+	position: absolute;
+	top: 0;
+	left: 50%;
+	margin-left: -46px;
+}
+
+.divider--shape-1up.divider--shape-gray {
+	background: url(../images/background/shapes/arrow-up-gray.png) center no-repeat;
+}
+
+/* divider Shape #2 */
+.divider--shape-2up {
+	width: 100%;
+	height: 9px;
+	background: url(../images/background/shapes/shape-2up.png) center repeat-x;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+.divider--shape-2down {
+	width: 100%;
+	height: 9px;
+	background: url(../images/background/shapes/shape-2down.png) center repeat-x;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+
+/* divider Shape #3 */
+.divider--shape-3up {
+	width: 100%;
+	height: 10px;
+	background: url(../images/background/shapes/shape-3up.png) center repeat-x;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.divider--shape-3down {
+	width: 100%;
+	height: 10px;
+	background: url(../images/background/shapes/shape-3down.png) center repeat-x;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+
+/* divider Shape #4 */
+.divider--shape-4up {
+	width: 100%;
+	height: 10px;
+	background: url(../images/background/shapes/shape-4up.png) center repeat-x;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.divider--shape-4down {
+	width: 100%;
+	height: 10px;
+	background: url(static/shapes/shape-4down.png) center repeat-x;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+
+/* divider Shape #5 */
+.divider--shape-5up {
+	width: 100%;
+	height: 12px;
+	background: url(../images/background/shapes/shape-5up.png) center repeat-x;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.divider--shape-5down {
+	width: 100%;
+	height: 12px;
+	background: url(../images/background/shapes/shape-5down.png) center repeat-x;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+
+/* divider Shape #6 */
+.divider--shape-6up {
+	width: 100%;
+	height: 6px;
+	background: url(../images/background/shapes/shape-6up.png) center repeat-x;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.divider--shape-6down {
+	width: 100%;
+	height: 6px;
+	background: url(../images/background/shapes/shape-6down.png) center repeat-x;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+
+/* divider Shape #7 */
+.divider--shape-7up {
+	width: 100%;
+	height: 12px;
+	background: url(../images/background/shapes/shape-7up.png) center repeat-x;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.divider--shape-7down {
+	width: 100%;
+	height: 12px;
+	background: url(../images/background/shapes/shape-7down.png) center repeat-x;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+
+/* divider Shape #8 */
+.divider--shape-8up {
+	width: 100%;
+	height: 13px;
+	background: url(../images/background/shapes/shape-8up.png) center repeat-x;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.divider--shape-8down {
+	width: 100%;
+	height: 13px;
+	background: url(../images/background/shapes/shape-8down.png) center repeat-x;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+
+/* divider Shape #9 */
+.divider--shape-4 {
+	width: 100%;
+	height: 14px;
+	background: url(static/shapes/shape-4.png) center no-repeat;!important;
+	margin-bottom: 20px;
+	margin-top: 20px;
+}
+
+/* divider Shape #10 */
+.divider--shape-5 {
+	width: 100%;
+	height: 24px;
+	background: url(../images/background/shapes/shape-5.png) center no-repeat;
+	margin-bottom: 25px;
+	margin-top: 20px;
+}
+
+/* divider Shape #11 */
+.divider--shape-theme {
+	width: 92px;
+	height: 20px;
+	background: url(../images/background/shapes/arrow-up-theme.png) center no-repeat;
+	position: absolute;
+	top: 0;
+	left: 50%;
+	margin-left: -46px;
+}
+
+/* divider Shape #11*/
+.divider--shape-11 {
+	width: 100%;
+	height: 16px;
+	background: url(../images/background/shapes/shape-11.png) center no-repeat;
+}
+
+/* divider Shape #12*/
+.divider--shape-12 {
+	width: 100%;
+	height: 16px;
+	background: url(../images/background/shapes/shape-9.png) center no-repeat;
+	margin-bottom: 25px;
+	margin-top: 22px;
+}
+
+/**/
+.divider--shape-dark {
+	width: 92px;
+	height: 20px;
+	background: url(../images/background/shapes/arrow-down-dark.png) center no-repeat;
+	position: absolute;
+	top: -20px;
+	left: 50%;
+	margin-left: -46px;
+}
+
+.divider--shape-dark2 {
+	width: 92px;
+	height: 20px;
+	background: url(../images/background/shapes/arrow-down-dark2.png) center no-repeat;
+	position: absolute;
+	top: -20px;
+	left: 50%;
+	margin-left: -46px;
+}
+
+/**/
+.divider--shape-10up {
+	width: 92px;
+	height: 20px;
+	background: url(../images/background/shapes/shape-10up.png) center no-repeat;
+	position: absolute;
+	top: -20px;
+	left: 50%;
+	margin-left: -46px;
+}
+
+.divider--shape-10down {
+	width: 92px;
+	height: 20px;
+	background: url(../images/background/shapes/shape-10down.png) center no-repeat;
+	position: absolute;
+	bottom: -20px;
+	left: 50%;
+	margin-left: -46px;
+}
+
+.divider--shape-10uptheme {
+	width: 92px;
+	height: 20px;
+	background: url(../images/background/shapes/arrow-up-theme.png) center no-repeat;
+	position: absolute;
+	top: -20px;
+	left: 50%;
+	margin-left: -46px;
+}
+
+/* divider Shape #13 */
+.divider--shape-13 {
+	width: 100%;
+	height: 16px;
+	background: url(../images/background/shapes/shape-13.png) center no-repeat;
+	margin-bottom: 25px;
+	margin-top: 20px;
+}
+
+/* divider Shape #14 */
+.divider--shape-14up {
+	width: 92px;
+	height: 20px;
+	background: url(../images/background/shapes/shape-14up.png) center no-repeat;
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	margin-left: -46px;
+}
+
+.divider--shape-14down {
+	width: 92px;
+	height: 20px;
+	background: url(../images/background/shapes/shape-14down.png) center no-repeat;
+	position: absolute;
+	top: 0;
+	left: 50%;
+	margin-left: -46px;
+}
+
+/* divider Shape #14 */
+.divider--shape-left {
+	width: 20px;
+	height: 92px;
+	background: url(../images/background/shapes/shape-left.png) center no-repeat;
+	position: absolute;
+	top: 50%;
+	left: 0;
+	margin-top: -46px;
+}
+
+.divider--shape-right {
+	width: 20px;
+	height: 92px;
+	background: url(../images/background/shapes/shape-right.png) center no-repeat;
+	position: absolute;
+	top: 50%;
+	right: 0;
+	margin-top: -46px;
+}
+
+.divider--shape-header {
+	width: 100%;
+	height: 9px;
+	background: url(../images/background/shapes/shape-header.png) center repeat-x;
+	position: absolute;
+	left: 0;
+	bottom: -9px;
+}
+
+.header-divider {
+	position: relative;
+	padding: 0 90px;
+	width: 100%;
+	height: 100px;
+	background: url(../images/background/shapes/shape-header2.png) center no-repeat;
+}

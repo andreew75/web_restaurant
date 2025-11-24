@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Saffron | Elegant Restaurant & Cafe{% endblock %}
+
+{% block content %}
+
+{#<div id="wrapper" class="wrapper clearfix">#}
+
+<!-- Page Title #1
+============================================= -->
+{#<section id="page-title" class="page-title bg-overlay bg-parallax bg-overlay-gradient">#}
+{#    <div class="bg-section">#}
+{#        <img src="{% static 'img/bg_01.jpg' %}" alt="Background" />#}
+{#    </div>#}
+{#    <div class="container">#}
+{#        <div class="row">#}
+{#            <div class="col-xs-12 col-sm-12 col-md-12">#}
+{#                <div class="title title-1 text-center">#}
+{#                    <div class="title--content">#}
+{#                        <div class="title--heading">#}
+{#                            <h1>Reservation</h1>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div class="clearfix"></div>#}
+{#                    <ol class="breadcrumb">#}
+{#                        <li><a href="index.html">Home</a></li>#}
+{#                        <li><a href="index.html">Elements</a></li>#}
+{#                        <li class="active">Reservation</li>#}
+{#                    </ol>#}
+{#                    <div class="divider--shape-1down"></div>#}
+{#                </div>#}
+{#                <!-- .title end -->#}
+{#            </div>#}
+{#            <!-- .col-md-12 end -->#}
+{#        </div>#}
+{#        <!-- .row end -->#}
+{#    </div>#}
+{#    <!-- .container end -->#}
+{#</section>#}
+{#<!-- #page-title end -->#}
+{##}
+{#<div class="clearfix pt-150"></div>#}
+
+<!-- Reservation #1
+============================================= -->
+<section id="reservation1" class="reservation bg-overlay bg-overlay-dark bg-parallax pt-90 pb-80" style="margin-top: -150px">
+    <div class="bg-section">
+        <img src="{% static 'img/bg_01.jpg' %}" alt="Background" />
+    </div>
+    <div class="container">
+        <div class="divider--shape-1up"></div>
+        <div class="row clearfix">
+            <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2" style="padding-top:100px ">
+                <div class="heading heading-1 mb-50 text-center">
+                    <p class="heading--subtitle">Were you satisfied?</p>
+                    <h2 class="heading--title text-white">Write Your Review</h2>
+                </div>
+            </div>
+        </div>
+        <!-- .row end -->
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1">
+                <div class="reservation-form box-shadow mb-30 bg-white text-center">
+                    <div class="reservation--dec">
+                        We hope you enjoy your visit to our restaurant. Our chefs look forward to receiving compliments on our delicious dishes. We are always happy to welcome you.
+                        <br>Thank you for choosing our restaurant, Saffron!
+                    </div>
+                    <form method="post" action="assets/php/reservation.php" class="reservationForm mb-0">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <h5>How many stars will you give us?</h5>
+                                <div class="review-rating-fa">
+                                    <div class="star-rating-fa-inputs">
+                                        <input type="radio" id="star-fa-1" name="review_rating_fa" value="1">
+                                        <label for="star-fa-1" class="star-label-fa"><i class="fa-solid fa-star"></i></label>
+
+                                        <input type="radio" id="star-fa-2" name="review_rating_fa" value="2">
+                                        <label for="star-fa-2" class="star-label-fa"><i class="fa-solid fa-star"></i></label>
+
+                                        <input type="radio" id="star-fa-3" name="review_rating_fa" value="3">
+                                        <label for="star-fa-3" class="star-label-fa"><i class="fa-solid fa-star"></i></label>
+
+                                        <input type="radio" id="star-fa-4" name="review_rating_fa" value="4">
+                                        <label for="star-fa-4" class="star-label-fa"><i class="fa-solid fa-star"></i></label>
+
+                                        <input type="radio" id="star-fa-5" name="review_rating_fa" value="5">
+                                        <label for="star-fa-5" class="star-label-fa"><i class="fa-solid fa-star"></i></label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-4">
+                                <input type="text" class="form-control" name="res-name" id="name" placeholder="Your Name" required>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-4">
+                                <input type="email" class="form-control" name="res-email" id="email" placeholder="Email">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" name="res-phone" id="phone" placeholder="Phone Number" required>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <textarea class="form-control" name="res-message" id="message" rows="2" placeholder="Add your review"></textarea>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <label class="container_check" style="padding-bottom: 20px">
+                                    <input type="checkbox" name="agree" id="agree" style="margin-right: 10px; cursor: pointer;">
+                                    I agree to the <a href="#" data-bs-toggle="modal" data-bs-target="#terms-txt">Terms and Privacy Policy</a>
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <input type="submit" value="send feedback" name="send" class="btn btn--secondary btn--block">
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+												<!--Alert Message-->
+                            					<div class="reservation-result"></div>
+											</div>
+                        </div>
+                        <!-- .row end -->
+                    </form>
+                    <!-- form end -->
+                </div>
+                <!-- .contact-form end -->
+            </div>
+        </div>
+        <!-- .row end -->
+        <div class="divider--shape-1down"></div>
+    </div>
+    <!-- Modal terms -->
+    <div class="modal fade" id="terms-txt" tabindex="-1" role="dialog" aria-labelledby="termsLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="termsLabel">Terms and conditions</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Lorem ipsum dolor sit amet, in porro albucius qui, in <strong>nec quod novum accumsan</strong>, mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt sensibus.</p>
+                    <p>Lorem ipsum dolor sit amet, in porro albucius qui, in nec quod novum accumsan, mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt sensibus. Lorem ipsum dolor sit amet, <strong>in porro albucius qui</strong>, in nec quod novum accumsan, mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt sensibus.</p>
+                    <p>Lorem ipsum dolor sit amet, in porro albucius qui, in nec quod novum accumsan, mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt sensibus.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn_1" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+    <!-- .container end -->
+</section>
+<!-- #reservation1 end -->
+{#</div>#}
+{% endblock %}

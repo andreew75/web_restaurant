@@ -1,3 +1,5 @@
+{% load static %}
+
 <footer id="footer" class="footer footer-1 text-center">
     <!-- Widget Section
 	============================================= -->
@@ -131,7 +133,7 @@
                         <h3>Leave A Review</h3>
                         <p class="mb-0">Please rate our chefs.</p>
                         <p class="mb-0">Write a few kind words!</p>
-                        <a class="link--styled" href="#">Leave Feedback</a>
+                        <a class="link--styled" href="{% url 'reviews' %}">Leave Feedback</a>
                     </div>
                 </div>
                 <!-- .col-md-3 end -->

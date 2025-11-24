@@ -24,8 +24,8 @@ class MenuItem(models.Model):
     ]
 
     name = models.CharField(max_length=200, verbose_name='Name item')
-    description = models.TextField(verbose_name='Description item')
-    ingredients = models.TextField(verbose_name='Ingredients')
+    description = models.TextField(blank=True, verbose_name='Description item')
+    ingredients = models.TextField(blank=True, verbose_name='Ingredients')
     price = models.DecimalField(max_digits=8, decimal_places=2, verbose_name='Price')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Category')
     meal_type = models.CharField(choices=MEAL_TYPES_CHOICES, max_length=30, default='any', verbose_name='Type')

@@ -84,7 +84,7 @@
 					data-easeout="Power4.easeInOut"
 					data-masterspeed="2000">
 					<!-- MAIN IMAGE -->
-					<img src="../../../../Volumes/WD%20Blue/TOP%20Академия%20/Диплом/MAIN_FILES/web/assets/images/sliders/slide-bg/10.jpg" alt="Slide Background Image" width="1920" height="1280">
+					<img src="{% static 'img/main_02.jpg' %}" alt="Slide Background Image" width="1600" height="800">
 					<!-- LAYER NR. 1 -->
 					<div class="tp-caption"
 						data-x="center" data-hoffset="0"
@@ -140,7 +140,7 @@
 					data-easeout="Power4.easeInOut"
 					data-masterspeed="2000">
 					<!-- MAIN IMAGE -->
-					<img src="../../../../Volumes/WD%20Blue/TOP%20Академия%20/Диплом/MAIN_FILES/web/assets/images/sliders/slide-bg/11.jpg" alt="Slide Background Image" width="1920" height="1280">
+					<img src="{% static 'img/main_03.jpg' %}" alt="Slide Background Image" width="1600" height="800">
 					<!-- LAYER NR. 1 -->
 					<div class="tp-caption"
 						data-x="center" data-hoffset="0"
@@ -227,7 +227,7 @@
           <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1">
               <div class="banner--desc">
-                Granny was the first restaurant to open in Egypt, the restaurant was designed with the history in mind we have created a soft industrial dining room, combined with an open kitchen, coffee take out bar and coffee roastery.
+                Saffron was the first fine dining restaurant to open in Moscow. The restaurant's design was inspired by history: we created an industrial-style dining room combined with an open kitchen, a bar, takeaway coffee, and a roastery.
               </div>
             </div>
           </div>
@@ -329,7 +329,9 @@
       <!-- banner#2
      ============================================= -->
       <section id="banner2" class="banner banner-2 text-center pb-0">
+
         <div class="container">
+            {% for item in new_dishes %}
           <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-6">
               <div class="heading heading-1 text--center mt-60">
@@ -341,13 +343,13 @@
               <!-- .heading end -->
               <div class="mt-40">
                 <a class="btn btn--link" href="#">$34.95 one dish</a>
-                <a class="btn btn--secondary" href="#">Order Now</a>
+                <a class="btn btn--secondary" href="{% url 'menu:list' %}">Discover Our Menu</a>
               </div>
             </div>
             <!-- .col-md-6 end -->
             <div class="col-xs-12 col-sm-6 col-md-3">
               <div class="banner-img mt-20">
-                <img src="img/ban_01.jpg" alt="image">
+                <img src="/menu_images/ban_01.jpg" alt="image">
               </div>
             </div>
             <!-- .col-md-3 end -->
@@ -359,57 +361,20 @@
             </div>
             <!-- .col-md-3 end -->
           </div>
+              {% endfor %}
           <!-- .row end -->
         </div>
+
         <!-- .container end -->
       </section>
+
       <!-- #banner2 end -->
-
-      <!-- banner#3
-      ============================================= -->
-      <section id="banner3" class="banner banner-3 text-center pt-90">
-        <div class="container">
-          <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-3">
-              <div class="banner-img mt-20">
-                <img src="img/ban_03.jpg" alt="image">
-              </div>
-            </div>
-            <!-- .col-md-3 end -->
-            <div class="col-xs-12 col-sm-6 col-md-3">
-              <div class="banner-img">
-                <img src="img/ban_04.jpg" alt="image">
-              </div>
-            </div>
-            <!-- .col-md-3 end -->
-
-            <div class="col-xs-12 col-sm-12 col-md-6">
-              <div class="heading heading-1 text--center mt-40">
-                <p class="heading--subtitle">New dishes</p>
-                <h2 class="heading--title">Grilled American Fillet</h2>
-                <div class="divider--shape-4"></div>
-                <p class="heading--desc">Monkfish, onion, paella rice, garlic & smoked paprika, creamy chesapeake crab dip with artichoke, baked and topped with cheddar cheese, with crusty bread for dipping. creamy chesapeake crab dip with artichoke, baked and topped with a hot cheddar cheese. </p>
-                <div class="mt-40">
-                  <a class="btn btn--link" href="#">$24.95 one dish</a>
-                  <a class="btn btn--secondary" href="#">Order Now</a>
-                </div>
-              </div>
-              <!-- .heading end -->
-            </div>
-            <!-- .col-md-6 end -->
-
-          </div>
-          <!-- .row end -->
-        </div>
-        <!-- .container end -->
-      </section>
-      <!-- #banner3 end -->
 
 <!-- Testimonial #2
 ============================================= -->
 <section id="testimonial2" class="testimonial testimonial-1 bg-overlay bg-overlay-dark bg-parallax text-center">
     <div class="bg-section">
-        <img src="img/bg_01.jpg" alt="Background" />
+        <img src="{% static 'img/bg_01.jpg' %}" alt="Background"/>
     </div>
     <div class="container">
         <div class="divider--shape-1up"></div>

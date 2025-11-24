@@ -1,0 +1,51 @@
+.review-rating-fa p {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.star-rating-fa-inputs {
+  display: inline-block;
+  direction: rtl;   /*Если хотите, чтобы 5 звезд были слева */
+  font-size: 2.5em; /* Размер иконок */
+  /* color: #ccc; */ /* Это будет задаваться через fill в CSS */
+  padding-bottom: 20px;
+}
+
+.star-rating-fa-inputs input[type="radio"] {
+  display: none; /* Скрываем стандартные радиокнопки */
+}
+
+.star-rating-fa-inputs label.star-label-fa {
+  cursor: pointer; /* Показываем, что элемент кликабелен */
+  transition: color 0.2s ease-in-out; /* Плавный переход цвета */
+  display: inline-block; /* Чтобы звезды располагались в строку */
+  margin-right: 5px; /* Отступ между звездами */
+}
+
+.star-rating-fa-inputs .star-label-fa .fa-solid.fa-star {
+  color: #ccc; /* Цвет пустой звезды */
+  transition: color 0.2s ease-in-out;
+}
+
+/* При наведении на звезду (label), подсветить ее и все звезды слева от нее */
+.star-rating-fa-inputs label.star-label-fa:hover .fa-solid.fa-star {
+  color: #ffc107; /* Цвет заполненной звезды */
+}
+/* Для сброса цвета у звезд справа при наведении */
+.star-rating-fa-inputs label.star-label-fa:hover ~ label.star-label-fa .fa-solid.fa-star {
+  color: #ccc;
+}
+
+/* При выборе радиокнопки */
+/* Сбросить цвет у звезд справа */
+.star-rating-fa-inputs input[type="radio"]:checked ~ label.star-label-fa .fa-solid.fa-star {
+  color: #ccc;
+}
+/* Заполнить текущую выбранную звезду */
+.star-rating-fa-inputs input[type="radio"]:checked + label.star-label-fa .fa-solid.fa-star {
+  color: #ffc107;
+}
+/* Заполнить предыдущие звезды */
+.star-rating-fa-inputs input[type="radio"]:checked ~ label.star-label-fa .fa-solid.fa-star {
+  color: #ffc107;
+}

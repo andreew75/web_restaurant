@@ -38,7 +38,7 @@ def home(request):
         'reviews': reviews,
         'chefs': chefs,
     }
-    print()
+
     return render(request, 'home.html', context)
 
 

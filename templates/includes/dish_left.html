@@ -1,0 +1,35 @@
+<section id="banner2" class="banner banner-2 text-center pb-0">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6">
+              <div class="heading heading-1 text--center mt-60">
+                <p class="heading--subtitle">New dishes</p>
+                <h2 class="heading--title">{{ item.title }}</h2>
+                <div class="divider--shape-4"></div>
+                <p class="heading--desc">{{ item.description }}</p>
+              </div>
+              <!-- .heading end -->
+              <div class="mt-40">
+                <a class="btn btn--link" href="{% url 'menu:list' %}">${{ item.price }}</a>
+                <a class="btn btn--secondary" href="{% url 'menu:list' %}">Discover Our Menu</a>
+              </div>
+            </div>
+            <!-- .col-md-6 end -->
+            <div class="col-xs-12 col-sm-6 col-md-3">
+              <div class="banner-img mt-20">
+                <img src="{{ item.image.url }}" alt="image">
+              </div>
+            </div>
+            <!-- .col-md-3 end -->
+            <div class="col-xs-12 col-sm-6 col-md-3">
+              <div class="banner-img">
+                <img src="{{ item.image.url }}" alt="image">
+              </div>
+              <!-- .col-md-3 end -->
+            </div>
+            <!-- .col-md-3 end -->
+          </div>
+          <!-- .row end -->
+        </div>
+        <!-- .container end -->
+      </section>

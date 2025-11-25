@@ -328,47 +328,14 @@
 
       <!-- banner#2
      ============================================= -->
-      <section id="banner2" class="banner banner-2 text-center pb-0">
 
-        <div class="container">
             {% for item in new_dishes %}
-          <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-6">
-              <div class="heading heading-1 text--center mt-60">
-                <p class="heading--subtitle">New dishes</p>
-                <h2 class="heading--title">Grilled Seafood Paella</h2>
-                <div class="divider--shape-4"></div>
-                <p class="heading--desc">Monkfish, onion, paella rice, garlic & smoked paprika, creamy chesapeake crab dip with artichoke, baked and topped with cheddar cheese, with crusty bread for dipping. creamy chesapeake crab dip with artichoke, baked and topped with a hot cheddar cheese.</p>
-              </div>
-              <!-- .heading end -->
-              <div class="mt-40">
-                <a class="btn btn--link" href="#">$34.95 one dish</a>
-                <a class="btn btn--secondary" href="{% url 'menu:list' %}">Discover Our Menu</a>
-              </div>
-            </div>
-            <!-- .col-md-6 end -->
-            <div class="col-xs-12 col-sm-6 col-md-3">
-              <div class="banner-img mt-20">
-                <img src="/menu_images/ban_01.jpg" alt="image">
-              </div>
-            </div>
-            <!-- .col-md-3 end -->
-            <div class="col-xs-12 col-sm-6 col-md-3">
-              <div class="banner-img">
-                <img src="img/ban_02.jpg" alt="image">
-              </div>
-              <!-- .col-md-3 end -->
-            </div>
-            <!-- .col-md-3 end -->
-          </div>
-              {% endfor %}
-          <!-- .row end -->
-        </div>
-
-        <!-- .container end -->
-      </section>
-
-      <!-- #banner2 end -->
+            {% if forloop.counter|divisibleby:2 %}
+                {% include 'includes/dish_right.html' %}
+            {% else %}
+                {% include 'includes/dish_left.html' %}
+            {% endif %}
+        {% endfor %}
 
 <!-- Testimonial #2
 ============================================= -->
@@ -510,108 +477,34 @@
             <!-- .col-md-8 end -->
         </div>
         <!-- .row end -->
+        {% for item in category_dishes %}
         <div class="row">
             <!-- Dish #1 -->
             <div class="col-xs-12 col-sm-6 col-md-4 pd-0">
                 <div class="dish-panel">
-                    <a href="menu-variations.html">
+                    <a href="{% url 'menu:list' %}">
                         <div class="dish--img">
-                            <img src="img/menumix_01.jpg" alt="dish img">
+                            {% if item.category.image and item.category.image.url %}
+                            <img src="{{ item.category.image.url }}" alt="{{ item.category.name }}">
+                            {% else %}
+                            <img src="{% static 'img/6.jpg' %}" alt="{{ item.category.name }}">
+                            {% endif %}
                         </div>
                         <div class="dish--content text--center">
-                            <h3 class="dish--title">salad</h3>
-                            <span class="dish--price">From $6.95</span>
+                            <h3 class="dish--title">{{ item.category.name }}</h3>
+                            <span class="dish--price">From ${{ item.dish.price }}</span>
                         </div>
                     </a>
                 </div>
                 <!-- .dish end -->
             </div>
-            <!-- .col-md-4 end -->
-            <!-- Dish #2 -->
-            <div class="col-xs-12 col-sm-6 col-md-4 pd-0">
-                <div class="dish-panel">
-                    <a href="menu-variations.html">
-                        <div class="dish--img">
-                            <img src="img/menumix_02.jpg" alt="dish img">
-                        </div>
-                        <div class="dish--content text--center">
-                            <h3 class="dish--title">Soup</h3>
-                            <span class="dish--price">From $8.95</span>
-                        </div>
-                    </a>
-                </div>
-                <!-- .dish end -->
-            </div>
-            <!-- .col-md-4 end -->
-            <!-- Dish #3 -->
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <div class="dish-panel">
-                    <a href="menu-variations.html">
-                        <div class="dish--img">
-                            <img src="img/menumix_03.jpg" alt="dish img">
-                        </div>
-                        <div class="dish--content text--center">
-                            <h3 class="dish--title">Chicken Meals</h3>
-                            <span class="dish--price">From $15.95</span>
-                        </div>
-                    </a>
-                </div>
-                <!-- .dish end -->
-            </div>
-            <!-- .col-md-4 end -->
-            <!-- Dish #4 -->
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <div class="dish-panel">
-                    <a href="menu-variations.html">
-                        <div class="dish--img">
-                            <img src="img/menumix_04.jpg" alt="dish img">
-                        </div>
-                        <div class="dish--content text--center">
-                            <h3 class="dish--title">Meat Meals</h3>
-                            <span class="dish--price">From $20.95</span>
-                        </div>
-                    </a>
-                </div>
-                <!-- .dish end -->
-            </div>
-            <!-- .col-md-4 end -->
-            <!-- Dish #5 -->
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <div class="dish-panel">
-                    <a href="menu-variations.html">
-                        <div class="dish--img">
-                            <img src="img/menumix_05.jpg" alt="dish img">
-                        </div>
-                        <div class="dish--content text--center">
-                            <h3 class="dish--title">Fish Meals</h3>
-                            <span class="dish--price">From $26.95</span>
-                        </div>
-                    </a>
-                </div>
-                <!-- .dish end -->
-            </div>
-            <!-- .col-md-4 end -->
-            <!-- Dish #6 -->
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <div class="dish-panel">
-                    <a href="menu-variations.html">
-                        <div class="dish--img">
-                            <img src="img/menumix_06.jpg" alt="dish img">
-                        </div>
-                        <div class="dish--content text--center">
-                            <h3 class="dish--title">Desserts</h3>
-                            <span class="dish--price">From $10.95</span>
-                        </div>
-                    </a>
-                </div>
-                <!-- .dish end -->
-            </div>
-            <!-- .col-md-4 end -->
+            {% endfor %}
+
         </div>
         <!-- .row end -->
         <div class="row text-center mt-70">
             <div class="col-xs-12 col-sm-12 col-md-12">
-                <a class="btn btn--secondary btn--lg" href="#">Discover Full Menu</a>
+                <a class="btn btn--secondary btn--lg" href="{% url 'menu:list' %}">Discover Full Menu</a>
             </div>
         </div>
         <!-- .row end -->

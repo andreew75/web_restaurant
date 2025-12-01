@@ -4,12 +4,193 @@
 {% block title %}Блог - Saffron{% endblock %}
 
 {% block content %}
-<section class="blog-page">
-    <div class="container">
-        <div class="text-center">
-            <h1>Наш блог</h1>
-            <p>Страница блога в разработке</p>
-        </div>
+<section id="page-title" class="page-title bg-overlay bg-parallax bg-overlay-gradient">
+    <div class="bg-section">
+        <img src="{% static 'img/blog_main.jpg' %}" alt="Background" />
     </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="title title-4 text-center">
+                    <div class="title--content">
+                        <div class="title--subtitle">Don't miss</div>
+                        <div class="title--heading">
+                            <h1>Tips From Our Chefs</h1>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <ol class="breadcrumb">
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li>blog</li>
+                    </ol>
+                    <div class="divider--shape-1down divider--shape-gray"></div>
+                </div>
+                <!-- .title end -->
+            </div>
+            <!-- .col-md-12 end -->
+        </div>
+        <!-- .row end -->
+    </div>
+    <!-- .container end -->
 </section>
+<!-- #page-title end -->
+<!-- Blog Grid
+============================================= -->
+<section id="blog" class="blog blog-grid bg-gray pb-90">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-9">
+                <div class="row">
+                 {% for post in posts %}
+                    <!-- Blog Entry #1 -->
+                    <div class="col-xs-12 col-sm-6 col-md-4">
+                        <div class="blog-entry">
+                            <div class="entry--img">
+                                <a href="#">
+									<img src="{{ post.image.url }}" alt="entry image"/>
+								</a>
+                            </div>
+                            <div class="entry--content">
+                                <div class="entry--meta">
+                                    <span><a href="#">Fall</a> , <a href="#">Side Dish</a></span>
+                                </div>
+                                <div class="entry--title">
+                                    <h4><a href="#">{{ post.title }}</a></h4>
+                                </div>
+                                <div class="entry--bio">
+                                    {{ post.short_description }}
+                                </div>
+                                <div class="entry--footer">
+                                    <div class="entry--date">
+                                        {{ post.created_at }}
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- .entry-content end -->
+                        </div>
+                        <!-- .blog-entry end -->
+                    </div>
+                    <!-- .col-md-4 end -->
+                {% endfor %}
+                </div>
+                <!-- .row end -->
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 clearfix mt-20 text--center">
+                        <ul class="pagination">
+                            <li class="active"><a href="#">1</a>
+                            </li>
+                            <li><a href="#">2</a>
+                            </li>
+                            <li><a href="#">3</a>
+                            </li>
+                            <li>
+                                <a href="#" aria-label="Next">
+									<span aria-hidden="true"><i class="fa fa-angle-right"></i></span>
+								</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- .col-md-12 end -->
+                </div>
+                <!-- .row end -->
+            </div>
+            <!-- .col-md-9 end -->
+            <div class="col-xs-12 col-sm-12 col-md-3">
+                <!-- Search
+============================================= -->
+<div class="widget widget-search">
+    <div class="widget--content">
+        <form class="form-search">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Type Your Search Words">
+                <span class="input-group-btn">
+					<button class="btn" type="button"><i class="fa fa-search"></i></button>
+				</span>
+
+            </div>
+            <!-- /input-group -->
+        </form>
+    </div>
+</div>
+<!-- .widget-search end -->
+
+
+<!-- Recent Posts
+============================================= -->
+<div class="widget widget-recent-posts">
+    <div class="widget--title">
+        <h5>recent posts</h5>
+    </div>
+    <div class="widget--content">
+        <div class="entry">
+            <img src="assets/images/blog/thumb/1.jpg" alt="title" />
+            <div class="entry-desc">
+                <div class="entry-meta">
+                    <a href="#">Oct 15, 2017</a>
+                </div>
+                <div class="entry-title">
+                    <a href="#">The Best Side Dishes for Next Dinner</a>
+                </div>
+            </div>
+        </div>
+        <!-- .recent-entry end -->
+
+        <div class="entry">
+            <img src="assets/images/blog/thumb/2.jpg" alt="title" />
+            <div class="entry-desc">
+                <div class="entry-meta">
+                    <a href="#">Sep 15, 2016</a>
+                </div>
+                <div class="entry-title">
+                    <a href="#">Cornbread Stuffing Apples and Sausage</a>
+                </div>
+            </div>
+        </div>
+        <!-- .recent-entry end -->
+
+    </div>
+</div>
+<!-- .widget-recent end -->
+
+
+<!-- Tag Clouds
+============================================= -->
+<div class="widget widget-tags">
+    <div class="widget--title">
+        <h5>tag clouds</h5>
+    </div>
+    <div class="widget--content">
+        <a href="#">{{ post.tags }}</a>
+        <a href="#">modern</a>
+        <a href="#">corporate</a>
+        <a href="#">business</a>
+        <a href="#">fresh</a>
+        <a href="#">awesome</a>
+    </div>
+</div>
+<!-- .widget-tags end -->
+
+<!-- Instagram Feed
+============================================= -->
+<div class="widget widget-instagram">
+    <div class="widget--title">
+        <h5>Instagram feed</h5>
+    </div>
+    <div class="widget--content">
+        <div id="instafeedSidebar" class="instafeed" data-insta-number="8"></div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<!-- .widget-instagram end -->
+            </div>
+            <!-- .col-md-3 end -->
+        </div>
+        <!-- .row end -->
+    </div>
+    <!-- .container end -->
+</section>
+<!-- #blog end -->
+
+<div class="clearfix"></div>
+<!-- footer#1
 {% endblock %}

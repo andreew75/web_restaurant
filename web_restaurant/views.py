@@ -7,7 +7,10 @@ from chefs.models import Chef
 def home(request):
     # Для секции Specials - берем 6 блюд, помеченных как специальные
     special_dishes = MenuItem.objects.filter(is_special=True)[:6]
-    new_dishes = MenuItem.objects.filter(is_special=False)[:6]
+    # Для секции New Dishes - берем 2 блюда, помеченных как Новинки
+    new_dishes = MenuItem.objects.filter(is_new=True)[:2]
+
+    salad_dishes = MenuItem.objects.filter(category_id=4)
 
     # Если специальных блюд меньше 6, дополняем обычными
     if len(special_dishes) < 6:
@@ -25,6 +28,8 @@ def home(request):
                 'category': category,
                 'dish': dish
             })
+        # Для каждой категории получаем 6 блюд
+        category.menu_items = MenuItem.objects.filter(category=category)[:6]
 
         # Секция Testimonials - отзывы клиентов
     reviews = Review.objects.filter(is_published=True)[:3]
@@ -34,7 +39,9 @@ def home(request):
     context = {
         'special_dishes': special_dishes,
         'new_dishes': new_dishes,
+        'menu_categories': menu_categories,
         'category_dishes': category_dishes,
+        'salad_dishes': salad_dishes,
         'reviews': reviews,
         'chefs': chefs,
     }

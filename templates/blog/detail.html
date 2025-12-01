@@ -1,10 +1,354 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% load static %}
 
-</body>
-</html>
+{% block content %}
+<section id="page-title" class="page-title bg-overlay bg-parallax bg-overlay-gradient">
+    <div class="bg-section">
+        <img src="{% static 'img/blog_detail_main.jpg' %}" alt="Background" />
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="title title-4 text-center">
+                    <div class="title--content">
+                        <div class="title--subtitle">Don't miss</div>
+                        <div class="title--heading">
+                            <h1>{{ post.title }}</h1>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <ol class="breadcrumb">
+                        <li><a href="{% url 'home' %}">Home</a>
+                        </li>
+                        <li><a href="{% url 'blog:list' %}">blog</a>
+                        </li>
+                        <li class="active">{{ post.title }}</li>
+                    </ol>
+                    <div class="divider--shape-1down divider--shape-gray"></div>
+                </div>
+                <!-- .title end -->
+            </div>
+            <!-- .col-md-12 end -->
+        </div>
+        <!-- .row end -->
+    </div>
+    <!-- .container end -->
+</section>
+
+<section id="blog" class="blog blog-single bg-gray pb-90">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-9">
+                <!-- Blog Entry -->
+                <div class="blog-entry">
+                    <div class="entry--img">
+							<img class="blog-detail" src="{{ post.image.url }}" alt="entry image" style="width: 100%!important; height: 450px!important;"/>
+                    </div>
+                    <div class="entry--content">
+                        <div class="entry--meta">
+                            <span>{{ post.created_at|date:"d.m.Y" }} / </span>
+                            <span>
+                                    {% for tag in post.tags.all %}
+                                        <a href="{% url 'blog:posts_by_tag' tag.slug %}" class="tag-link">
+                                            {{ tag.name }}
+                                        </a>{% if not forloop.last %}, {% endif %}
+                                    {% empty %}
+                                        <span>No tags</span>
+                                    {% endfor %}
+                                </span>
+                        </div>
+                        <div class="entry--title">
+                            <h3>{{ post.title }}</h3>
+                        </div>
+                        <div class="entry--bio">
+                            {{ post.content|linebreaks }}
+                        </div>
+                    </div>
+                </div>
+                <!-- .blog-entry end -->
+
+                <div class="entry-prev-next clearfix">
+    <!-- Предыдущий пост -->
+    <div class="entry-prev">
+        <div class="entry-prev-content">
+            {% with post.get_previous_by_created_at as prev_post %}
+                {% if prev_post and prev_post.is_published %}
+                    {% if prev_post.image %}
+                        <img class="img-detail" src="{{ prev_post.image.url }}#blog" alt="{{ prev_post.title }}" style="width: 15%"/>
+                    {% else %}
+                        <img src="/static/img/blog_default.jpg" alt="{{ prev_post.title }}" />
+                    {% endif %}
+                    <div class="entry-desc">
+                        <p>previous</p>
+                        <a href="{{ prev_post.get_absolute_url }}#blog">
+                            {{ prev_post.title|truncatechars:50 }}
+                        </a>
+                    </div>
+                {% else %}
+                    <!-- Если предыдущего поста нет, показываем заглушку -->
+                    <div class="entry-desc no-post">
+                        <p>previous</p>
+                        <span>This is the first post</span>
+                    </div>
+                {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+
+    <!-- Следующий пост -->
+    <div class="entry-next">
+        <div class="entry-next-content">
+            {% with post.get_next_by_created_at as next_post %}
+                {% if next_post and next_post.is_published %}
+                    {% if next_post.image %}
+                        <img class="img-detail" src="{{ next_post.image.url }}#blog" alt="{{ next_post.title }}" style="width: 15%"/>
+                    {% else %}
+                        <img src="/static/img/blog_default.jpg" alt="{{ next_post.title }}" />
+                    {% endif %}
+                    <div class="entry-desc">
+                        <p>next</p>
+                        <a href="{{ next_post.get_absolute_url }}#blog">
+                            {{ next_post.title|truncatechars:50 }}
+                        </a>
+                    </div>
+                {% else %}
+                    <!-- Если следующего поста нет, показываем заглушку -->
+                    <div class="entry-desc no-post">
+                        <p>next</p>
+                        <span>This is the last post</span>
+                    </div>
+                {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+</div>
+                <!-- .entry-bio end -->
+
+                <div class="entry-widget entry-related clearfix">
+                    <div class="entry-widget-title">
+                        <h4>related posts</h4>
+                    </div>
+                    <div class="entry-widget-content">
+                        <div class="row">
+                            <!-- Related Post #1 -->
+                            {% for similar_post in similar_posts %}
+                            <div class="col-xs-12 col-sm-4 col-md-4 entry">
+                                <div class="entry--img">
+                                    <a href="{% url 'blog:detail' similar_post.id %}#blog">
+										<img src="{{ similar_post.image.url }}" alt="title"/>
+									</a>
+                                </div>
+                                <div class="entry--title">
+                                    <h5><a href="{% url 'blog:detail' similar_post.id %}#blog">{{ similar_post.title|truncatechars:60 }}</a></h5>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <!-- .row end -->
+                    </div>
+                </div>
+                <!-- .entry-related end -->
+                <div class="entry-widget entry-comments clearfix">
+                    <div class="entry-widget-title">
+                        <h4>comments</h4>
+                    </div>
+                    <div class="entry-widget-content">
+                        <ul class="comments-list">
+                            <li class="comment-body">
+                                <div class="avatar">
+                                    <img src="assets/images/team/thumb/2.jpg" alt="avatar" />
+                                </div>
+                                <div class="comment">
+                                    <h6>Anthony Kevin</h6>
+                                    <div class="date">Jan 28, 2017 - 08:07 pm</div>
+                                    <p>The example about the mattress sizing page you mentioned in the last WBF can be a perfect example of new keywords and content, and broadening the funnel as well. I can only imagine the sale numbers if that was the site of a mattress selling company.</p>
+                                    <a class="reply" href="#">reply</a>
+                                </div>
+                            </li>
+                            <!-- comment end -->
+
+                            <li class="comment-body">
+                                <div class="avatar">
+                                    <img src="assets/images/team/thumb/3.jpg" alt="avatar" />
+                                </div>
+                                <div class="comment">
+                                    <h6>Max Burt
+                                    </h6>
+                                    <div class="date">Jan 28, 2017 - 10:07 pm</div>
+                                    <p>The example about the mattress sizing page you mentioned in the last WBF can be a perfect example of new keywords and content, and broadening the funnel as well. I can only imagine the sale numbers if that was the site of a mattress selling company.</p>
+                                    <a class="reply" href="#">reply</a>
+                                </div>
+
+                                <ul class="comment-children">
+                                    <li class="comment-body">
+                                        <div class="avatar">
+                                            <img src="assets/images/team/thumb/2.jpg" alt="avatar" />
+                                        </div>
+                                        <div class="comment">
+                                            <h6>Todd Stephen</h6>
+                                            <div class="date">Jan 28, 2017 - 10:07 pm</div>
+                                            <p>The example about the mattress sizing page you mentioned in the last WBF can be a perfect example of new keywords and content, and broadening the funnel as well. I can only imagine the sale numbers if that was the site of a mattress selling company.</p>
+                                            <a class="reply" href="#">reply</a>
+                                        </div>
+                                        <ul class="comment-children">
+                                            <li class="comment-body">
+                                                <div class="avatar">
+                                                    <img src="assets/images/team/thumb/2.jpg" alt="avatar" />
+                                                </div>
+                                                <div class="comment">
+                                                    <h6>Walter Adler</h6>
+                                                    <div class="date">Jan 28, 2017 - 10:30 pm</div>
+                                                    <p>The example about the mattress sizing page you mentioned in the last WBF can be a perfect example of new keywords and content, and broadening the funnel as well. I can only imagine the sale numbers if that was the site of a mattress selling company.</p>
+                                                    <a class="reply" href="#">reply</a>
+                                                </div>
+                                            </li>
+                                            <!-- comment end -->
+                                        </ul>
+                                    </li>
+                                    <!-- comment end -->
+
+                                    <li class="comment-body">
+                                        <div class="avatar">
+                                            <img src="assets/images/team/thumb/2.jpg" alt="avatar" />
+                                        </div>
+                                        <div class="comment">
+                                            <h6>Anthony Kevin</h6>
+                                            <div class="date">Jan 28, 2017 - 08:07 pm</div>
+                                            <p>The example about the mattress sizing page you mentioned in the last WBF can be a perfect example of new keywords and content, and broadening the funnel as well. I can only imagine the sale numbers if that was the site of a mattress selling company.</p>
+                                            <a class="reply" href="#">reply</a>
+                                        </div>
+                                    </li>
+                                    <!-- comment end -->
+
+                                </ul>
+                                <!-- .comment-children end -->
+                            </li>
+                            <!-- comment end -->
+
+                            <li class="comment-body">
+                                <div class="avatar">
+                                    <img src="assets/images/team/thumb/2.jpg" alt="avatar" />
+                                </div>
+                                <div class="comment">
+                                    <h6>Walter Adler</h6>
+                                    <div class="date">Jan 28, 2017 - 10:30 pm</div>
+                                    <p>The example about the mattress sizing page you mentioned in the last WBF can be a perfect example of new keywords and content, and broadening the funnel as well. I can only imagine the sale numbers if that was the site of a mattress selling company.</p>
+                                    <a class="reply" href="#">reply</a>
+                                </div>
+                            </li>
+                            <!-- comment end -->
+
+                        </ul>
+                        <!-- .comments-list end -->
+                    </div>
+                </div>
+                <!-- .entry-comments end -->
+
+                <div class="entry-widget entry-add-comment mb-0 clearfix">
+                    <div class="entry-widget-title">
+                        <h4>Leave A Reply</h4>
+                    </div>
+                    <div class="entry-widget-content">
+                        <form id="post-comment" class="mb-0">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-6">
+                                    <input type="text" class="form-control" id="commenter-first-name" placeholder="First Name:" />
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-6">
+                                    <input type="text" class="form-control" id="commenter-last-name" placeholder="Last Name:" />
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-6">
+                                    <input type="email" class="form-control" id="commenter-email" placeholder="Email:" />
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-6">
+                                    <input type="text" class="form-control" id="commenter-website" placeholder="website:" />
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <textarea class="form-control" id="commenter-comment" rows="2" placeholder="Comment"></textarea>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <button type="submit" class="btn btn--secondary btn--block">Post Your Comment</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- .entry-comments end -->
+
+            </div>
+            <!-- .col-md-9 end -->
+            <div class="col-xs-12 col-sm-12 col-md-3">
+                <!-- Search
+============================================= -->
+<div class="widget widget-search">
+    <div class="widget--content">
+        <form method="get" action="{% url 'blog:list' %}#blog" class="form-search">
+            <div class="input-group">
+                <input type="text" class="form-control" name="q" placeholder="Type Your Search Words">
+                <span class="input-group-btn">
+                    <button class="btn" type="submit"><i class="fa fa-search"></i></button>
+				</span>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- .widget-search end -->
+
+
+<!-- Recent Posts
+============================================= -->
+<div class="widget widget-recent-posts">
+    <div class="widget--title">
+        <h5>best posts</h5>
+    </div>
+    <div class="widget--content">
+        {% for best_post in best_posts %}
+            <div class="entry">
+                {% if best_post.image %}
+                    <img src="{{ best_post.image.url }}" alt="{{ best_post.title }}" />
+                {% endif %}
+                <div class="entry-desc">
+                    <div class="entry-meta">
+                        {{ best_post.created_at|date:"M d, Y" }}
+                        {% if best_post.is_best %}
+                            <span class="best-badge">★</span>
+                        {% endif %}
+                    </div>
+                    <div class="entry-title">
+                        <a href="{% url 'blog:detail' best_post.id %}#blog">
+                            {{ best_post.title|truncatechars:40 }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        <!-- .recent-entry end -->
+    </div>
+</div>
+<!-- .widget-recent end -->
+
+
+<!-- Tag Clouds
+============================================= -->
+<div class="widget widget-tags">
+    <div class="widget--title">
+        <h5>tag clouds</h5>
+    </div>
+    <div class="widget--content">
+        {% for tag in all_tags %}
+        <a href="{% url 'blog:posts_by_tag' tag.slug %}">{{ tag.name }}</a>
+        {% endfor %}
+    </div>
+</div>
+<!-- .widget-tags end -->
+            </div>
+            <!-- .col-md-3 end -->
+        </div>
+        <!-- .row end -->
+    </div>
+    <!-- .container end -->
+</section>
+<!-- #blog end -->
+
+<div class="clearfix"></div>
+{% endblock %}

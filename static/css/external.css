@@ -83,7 +83,7 @@
 .mfp-zoom-out-cur .mfp-image-holder .mfp-close {
     cursor: -moz-zoom-out;
     cursor: -webkit-zoom-out;
-    cursor: zoom-out
+    cursor: pointer;
 }
 
 .mfp-zoom {

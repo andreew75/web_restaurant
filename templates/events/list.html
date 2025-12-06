@@ -4,12 +4,137 @@
 {% block title %}События - Saffron{% endblock %}
 
 {% block content %}
-<section class="events-page">
-    <div class="container">
-        <div class="text-center">
-            <h1>События</h1>
-            <p>Страница событий в разработке</p>
-        </div>
+<section id="page-title" class="page-title bg-overlay bg-parallax bg-overlay-gradient">
+    <div class="bg-section">
+        <img src="{% static 'img/event_main.jpg' %}" alt="Background" />
     </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="title title-4 text-center">
+                    <div class="title--content">
+                        <div class="title--subtitle">Don't miss</div>
+                        <div class="title--heading">
+                            <h1>Our News & Events</h1>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <ol class="breadcrumb">
+                        <li><a href="{% url 'home' %}">Home</a>
+                        </li>
+                        <li>events</li>
+                    </ol>
+                    <div class="divider--shape-1down divider--shape-gray"></div>
+                </div>
+                <!-- .title end -->
+            </div>
+            <!-- .col-md-12 end -->
+        </div>
+        <!-- .row end -->
+    </div>
+    <!-- .container end -->
 </section>
+<!-- #page-title end -->
+
+<!-- Blog Standard
+============================================= -->
+<section id="blog" class="blog blog-standard bg-gray pb-90">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
+                <div class="row">
+                    <!-- Blog Entry #1 -->
+                    {% for event in events %}
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="blog-entry">
+                            <div class="entry--img">
+										<img src="{{ event.image.url }}" alt="entry image"/>
+                            </div>
+                            <div class="entry--content">
+                                <div class="entry--meta">
+                                    <span>{{ event.date|date:"d.m.Y" }}</span> / <span>{{ event.location }}</span> / <span>Start in {{ event.start_time|time:"H:i" }}</span>
+                                </div>
+                                <div class="entry--title">
+                                    <h3>{{ event.title }}</h3>
+                                    <p style="font-size: 18px"><b>Start in {{ event.start_time|time:"H:i" }}</b></p>
+                                </div>
+
+                                <div class="entry--bio">
+                                    <div class="short-text">
+                                        {{ event.description|truncatechars:400 }}
+                                    </div>
+                                    <div class="full-text" style="display: none">
+                                        {{ event.description }}
+                                    </div>
+
+                                </div>
+                                {% if event.description|length > 500 %}
+                                <div class="entry--more">
+                                    <button class="btn btn--secondary" onclick="toggleText(this)">read more</button>
+                                </div>
+                                {% endif %}
+                            </div>
+                            <!-- .entry-content end -->
+                        </div>
+                        <!-- .blog-entry end -->
+                    </div>
+                    {% endfor %}
+
+                </div>
+                <!-- .row end -->
+                <!-- Пагинация -->
+                {% if events.has_other_pages %}
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 clearfix mt-20 text--center">
+                        <ul class="pagination">
+                            {% if events.has_previous %}
+                                <li><a href="?page={{ events.previous_page_number }}#blog">&laquo;</a></li>
+                            {% else %}
+                                <span aria-hidden="true">&laquo;</span>
+                            {% endif %}
+
+                            {% for i in events.paginator.page_range %}
+                                {% if events.number == i %}
+                                    <li class="active"><a>{{ i }}</a></li>
+                                {% else %}
+                                    <li><a href="?page={{ i }}#blog">{{ i }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+
+                            {% if events.has_next %}
+                                <li><a href="?page={{ events.next_page_number }}#blog">&raquo;</a></li>
+                            {% else %}
+                                <li class="disabled"><span>&raquo;</span></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+                {% endif %}
+                <!-- .row end -->
+            </div>
+            <!-- .col-md-8 end -->
+        </div>
+        <!-- .row end -->
+    </div>
+    <!-- .container end -->
+</section>
+
+<script>
+function toggleText(button) {
+    const entry = button.closest('.entry--content');
+    const shortText = entry.querySelector('.short-text');
+    const fullText = entry.querySelector('.full-text');
+
+    if (fullText.style.display === 'none') {
+        fullText.style.display = 'block';
+        shortText.style.display = 'none';
+        button.textContent = 'Show less';
+    } else {
+        fullText.style.display = 'none';
+        shortText.style.display = 'block';
+        button.textContent = 'Read more';
+    }
+}
+</script>
+<div class="clearfix"></div>
 {% endblock %}

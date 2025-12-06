@@ -99,51 +99,51 @@
                 <!-- .row end -->
                 <!-- Pagination -->
                 {% if posts.has_other_pages %}
-<div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12 clearfix mt-20 text--center">
-        <ul class="pagination">
-            {% comment %} Кнопка "Назад" {% endcomment %}
-            {% if posts.has_previous %}
-                <li>
-                    <a href="?page={{ posts.previous_page_number }}{% if query %}&q={{ query }}{% endif %}#blog"
-                       aria-label="Previous">
-                        <span aria-hidden="true"><i class="fa fa-angle-left"></i></span>
-                    </a>
-                </li>
-            {% else %}
-                <li class="disabled">
-                    <span aria-hidden="true"><i class="fa fa-angle-left"></i></span>
-                </li>
-            {% endif %}
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 clearfix mt-20 text--center">
+                        <ul class="pagination">
+                            {% comment %} Кнопка "Назад" {% endcomment %}
+                            {% if posts.has_previous %}
+                                <li>
+                                    <a href="?page={{ posts.previous_page_number }}{% if query %}&q={{ query }}{% endif %}#blog"
+                                       aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                            {% else %}
+                                <li class="disabled">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </li>
+                            {% endif %}
 
-            {% comment %} Номера страниц {% endcomment %}
-            {% for num in posts.paginator.page_range %}
-                {% if posts.number == num %}
-                    <li class="active"><a href="#">{{ num }}</a></li>
-                {% elif num > posts.number|add:-3 and num < posts.number|add:3 %}
-                    <li>
-                        <a href="?page={{ num }}{% if query %}&q={{ query }}{% endif %}#blog">{{ num }}</a>
-                    </li>
+                            {% comment %} Номера страниц {% endcomment %}
+                            {% for num in posts.paginator.page_range %}
+                                {% if posts.number == num %}
+                                    <li class="active"><a>{{ num }}</a></li>
+                                {% elif num > posts.number|add:-3 and num < posts.number|add:3 %}
+                                    <li>
+                                        <a href="?page={{ num }}{% if query %}&q={{ query }}{% endif %}#blog">{{ num }}</a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+
+                            {% comment %} Кнопка "Вперед" {% endcomment %}
+                            {% if posts.has_next %}
+                                <li>
+                                    <a href="?page={{ posts.next_page_number }}{% if query %}&q={{ query }}{% endif %}#blog"
+                                       aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            {% else %}
+                                <li class="disabled">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
                 {% endif %}
-            {% endfor %}
-
-            {% comment %} Кнопка "Вперед" {% endcomment %}
-            {% if posts.has_next %}
-                <li>
-                    <a href="?page={{ posts.next_page_number }}{% if query %}&q={{ query }}{% endif %}#blog"
-                       aria-label="Next">
-                        <span aria-hidden="true"><i class="fa fa-angle-right"></i></span>
-                    </a>
-                </li>
-            {% else %}
-                <li class="disabled">
-                    <span aria-hidden="true"><i class="fa fa-angle-right"></i></span>
-                </li>
-            {% endif %}
-        </ul>
-    </div>
-</div>
-{% endif %}
                 <!-- .row end -->
             </div>
             <!-- .col-md-9 end -->

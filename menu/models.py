@@ -35,11 +35,13 @@ class MenuItem(models.Model):
         blank=True
     )
 
-    image = models.ImageField(upload_to='menu_images/')
+    image = models.ImageField(upload_to='menu_images/', blank=True)
+    image_dish = models.ImageField(upload_to='menu_images/', default='menu_images/default.png')
     calories = models.IntegerField(blank=True, null=True)
     is_special = models.BooleanField(default=False)
     is_new = models.BooleanField(default=False)
     cooking_time = models.IntegerField(default=15)
+    stop_list = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = 'Блюдо'

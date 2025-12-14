@@ -20,8 +20,20 @@ def dish_category(request):
         stop_list=False
     ).select_related('category').prefetch_related('meal_types').distinct()
 
+    drinks_items = MenuItem.objects.filter(
+        category__name='drinks',
+        stop_list=False
+    ).select_related('category').prefetch_related('meal_types').distinct()
+
+    desserts_items = MenuItem.objects.filter(
+        category__name='desserts',
+        stop_list=False
+    ).select_related('category').prefetch_related('meal_types').distinct()
+
     context = {
         'categories': categories,
         'breakfast_items': breakfast_items,
+        'drinks_items': drinks_items,
+        'desserts_items': desserts_items,
     }
     return render(request, 'menu/list.html', context)

@@ -5,6 +5,7 @@ class Category(models.Model):
     name = models.CharField(max_length=100, verbose_name='Name category')
     order = models.IntegerField(default=0, verbose_name='Order')
     image = models.ImageField(upload_to='menu_images/', blank=True, null=True)
+    image_background = models.ImageField(upload_to='menu_images/', default='menu_images/default.png')
 
     class Meta:
         verbose_name = "Category"

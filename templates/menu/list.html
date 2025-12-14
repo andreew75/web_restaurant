@@ -36,7 +36,7 @@
     <!-- .container end -->
 </section>
 
-    <section id="heading1" class="heading heading-1 bg-white" style="padding-bottom: 60px!important;">
+<section id="heading1" class="heading heading-1 bg-white" style="padding-bottom: 60px!important;">
     <div class="container">
         <div class="row clearfix">
             <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
@@ -62,8 +62,8 @@
                  <!-- Nav tabs -->
                  <ul class="nav nav-tabs">
                      <li><a href="{% url 'menu:list' %}#divider5">Breakfast</a></li>
-                     <li><a href="{% url 'menu:list' %}#divider5">Drinks</a></li>
-                     <li><a href="{% url 'menu:list' %}#divider1">Desserts</a></li>
+                     <li><a href="{% url 'menu:list' %}#divider4">Drinks</a></li>
+                     <li><a href="{% url 'menu:list' %}#divider3">Desserts</a></li>
                      <li><a href="{% url 'menu:list' %}#divider1">Full Menu</a></li>
                  </ul>
              </div>
@@ -72,20 +72,131 @@
              <!-- .col-md-12 end -->
      </div>
  </section>
+{% for category in categories %}
+    <!-- Проверяем, нужна ли эта категория -->
+    {% if category.name in "Salads,Soup,Meat dishes,Fish dishes,Snacks" %}
 
-<!-- Divider #1
+    <!-- Divider #1 Full Menu -->
+ <section id='{{ item.id }}' class="section-divider bg-overlay bg-parallax bg-overlay-dark4">
+     <div class="bg-section">
+         {% if category.image %}
+            <img src="{{ category.image_background.url }}" alt="{{ category.name }}" />
+            {% else %}
+            <img src="{{ category.image_background.url }}" alt="{{ category.name }}" />
+         {% endif %}
+     </div>
+     <div class="container">
+         <div class="divider--shape-1up"></div>
+            <div class="row clearfix">
+                <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
+                    <div class="heading heading-3 text--center">
+                        <p class="heading--subtitle">Start at 11.00</p>
+                        <h2 class="heading--title mb-0 text-white">{{ category.name }} Menu</h2>
+                    </div>
+                </div>
+            </div>
+         <div class="divider--shape-3down"></div>
+     </div>
+ </section>
+
+    <!-- Menu 1 Full Menu -->
+ <section class="menu menu-2 bg-white pb-60">
+        <div class="container">
+            <div class="row">
+                {% for item in category.menuitem_set.all %}
+                    {% if not item.stop_list %}
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="dish-panel">
+                        <div class="dish--img">
+                            <img src="{{ item.image_dish.url }}" alt="Dish Image">
+                            <div class="dish--overlay">
+                                <a class="dish-popup" data-toggle="modal" data-target="#dishPopup{{ item.id }}">
+                                    <i class="fa fa-search-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="dish--content">
+                            <h3 class="dish--title">{{ item.name }}</h3>
+                            <span class="dish--price" style="right: 10px!important;">{{ item.price }}</span>
+                            <p class="dish--desc">{{ item.ingredients }}</p>
+                            {% if item.calories %}
+                            <p class="dish--desc">Calories: {{ item.calories }} kcal</p>
+                            {% endif %}
+                            {% if item.cooking_time %}
+                            <p class="dish--desc">Cooking time: {{ item.cooking_time }} min</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                    {% endif %}
+                {% empty %}
+                <div class="col-xs-12">
+                    <div class="text-center">
+                        <p>There are no dishes in this category yet</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="arrow-top">
+        <a href="#heading1"><i class="fa fa-arrow-up"></i></a>
+        <p class="arrow-top-word">top</p>
+    </div>
+</section>
+
+    {% endif %}
+{% endfor %}
+
+<!-- Modal window -->
+{% for category in categories %}
+    {% if category.name in "Salads,Soup,Meat dishes,Fish dishes,Snacks" %}
+        {% for item in category.menuitem_set.all %}
+            {% if not item.stop_list %}
+<div class="modal fade" tabindex="-1" role="dialog" id="dishPopup{{ item.id }}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i class="fa fa-times"></i>
+                </button>
+                <div class="row reservation">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="img-popup">
+                            <img src="{{ item.image_dish.url }}" alt="dish img">
+                            <div class="img-popup-overlay">
+                                <div class="popup--price">{{ item.price }}</div>
+                                <h3 class="popup--title">{{ item.name }}</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="content-popup">
+                            <p>{{ item.description }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+{% endfor %}
+
+<!-- Divider #3 Desserts
 ============================================= -->
-<section id="divider1" class="section-divider bg-overlay bg-parallax bg-overlay-dark4">
+<section id="divider3" class="section-divider bg-overlay bg-parallax bg-overlay-dark4">
     <div class="bg-section">
-        <img src="{% static 'img/br_bg.jpg' %}" alt="Background" />
+        <img src="{% static 'img/des_bg.jpg' %}" alt="Background" />
     </div>
     <div class="container">
         <div class="divider--shape-1up"></div>
         <div class="row clearfix">
             <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
                 <div class="heading heading-3 text--center">
-                    <p class="heading--subtitle">Starts at 11:00</p>
-                    <h2 class="heading--title mb-0 text-white">Salads Menu</h2>
+                    <p class="heading--subtitle">Sweet Pleasure</p>
+                    <h2 class="heading--title mb-0 text-white">Desserts Menu</h2>
                 </div>
             </div>
             <!-- .col-md-8 end -->
@@ -95,25 +206,24 @@
     </div>
     <!-- .container end -->
 </section>
-<!-- #divider1 end -->
-
-<!-- Menu #2
+<!-- #divider3 end -->
+<!-- Menu
 ============================================= -->
-<section id="menu2" class="menu menu-2 bg-white pb-60">
+<section id="menu4" class="menu menu-2 bg-white pb-60">
     <div class="container">
         <div class="row">
             <!-- Dish #1 -->
             {% for category in categories %}
-                {% if category.name == 'salads' %}
-                    {% for item in category.menuitem_set.all %}
-                        {% if not item.stop_list %}
+                {% for item in category.menuitem_set.all %}
+                    {% if category.menuitem_set.all %}
+                        {% if category.name == 'Desserts' %}
             <div class="col-xs-12 col-sm-6 col-md-4">
                 <div class="dish-panel">
                     <div class="dish--img">
                         <img src="{{ item.image_dish.url }}" alt="Dish Image">
                         <div class="dish--overlay">
-                            <a class="dish-popup" data-toggle="modal" data-target="#dishPopup{{ item.id }}"><i class="fa fa-search-plus"></i></a>
-<div class="modal fade" tabindex="-1" role="dialog" id="dishPopup{{ item.id }}">
+                            <a class="dish-popup" data-toggle="modal" data-target="#dishPopup4{{ item.id }}"><i class="fa fa-search-plus"></i></a>
+<div class="modal fade" tabindex="-1" role="dialog" id="dishPopup4{{ item.id }}">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body">
@@ -155,676 +265,30 @@
                 </div>
                 <!-- .dish end -->
             </div>
-                        {% endif %}
-                    {% endfor %}
-                {% endif %}
+            <!-- .col-md-4 end -->
+                    {% endif %}
+                    {% else %}
+                        <h2 class="no-dihes" style="text-align: center">There are no dishes in this category yet</h2>
+                    {% endif %}
+                {% endfor %}
             {% endfor %}
-            <!-- .col-md-4 end -->
-        </div>
-        <!-- .row end -->
-    </div>
-    <div class="arrow-top" style="display: flex; flex-direction: column; align-items: center">
-        <a href="#tabs1"><i class="fa fa-arrow-up"></i></a>
-        <h5>top</h5>
-    </div>
-    <!-- .container end -->
-</section>
-<!-- #menu2 end -->
-
-<!-- Divider #1
-============================================= -->
-<section id="divider2" class="section-divider bg-overlay bg-parallax bg-overlay-dark4">
-    <div class="bg-section">
-        <img src="assets/images/background/11.jpg" alt="Background" />
-    </div>
-    <div class="container">
-        <div class="divider--shape-1up"></div>
-        <div class="row clearfix">
-            <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
-                <div class="heading heading-3 text--center">
-                    <p class="heading--subtitle">Starts at 11:00</p>
-                    <h2 class="heading--title mb-0 text-white">Soups</h2>
-                </div>
-            </div>
-            <!-- .col-md-8 end -->
-        </div>
-        <!-- .row end -->
-        <div class="divider--shape-3down"></div>
-    </div>
-    <!-- .container end -->
-</section>
-<!-- #divider1 end -->
-
-<!-- Menu #2
-============================================= -->
-<section id="menu3" class="menu menu-2 bg-white pb-60">
-    <div class="container">
-        <div class="row">
-            <!-- Dish #1 -->
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <div class="dish-panel">
-                    <div class="dish--img">
-                        <img src="assets/images/menu/gallery/13.jpg" alt="Dish Image">
-                        <div class="dish--overlay">
-                            <a class="dish-popup" data-toggle="modal" data-target="#dishPopup7"><i class="fa fa-search-plus"></i></a>
-<div class="modal fade" tabindex="-1" role="dialog" id="dishPopup7">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>
-                <div class="row reservation">
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="img-popup">
-                            <img src="assets/images/menu/menu-mixed-grid/7.jpg" alt="dish img">
-                            <div class="img-popup-overlay">
-                                <div class="popup--price">$24.95</div>
-                                <h3 class="popup--title">Cappuccino Coffee</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- .col-md-12 end -->
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="content-popup">
-                            <p>Pork fillet, ginger, garlic, honey, pepper & canola oil.creamy chesapeake crab dip with artichoke, baked and topped with cheddar cheese, with crusty bread for dipping. creamy chesapeake crab dip with artichoke, baked and topped with cheddar cheese.</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- .row end -->
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-                        </div>
-                    </div>
-                    <div class="dish--content">
-                        <h3 class="dish--title">Grilled Fillet</h3>
-                        <span class="dish--price">$12.95</span>
-                        <p class="dish--desc">eggs, bacon and cherry-tomatoes with bread.</p>
-                    </div>
-                </div>
-                <!-- .dish end -->
-            </div>
-            <!-- .col-md-4 end -->
-            <!-- Dish #2 -->
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <div class="dish-panel">
-                    <div class="dish--img">
-                        <img src="assets/images/menu/gallery/14.jpg" alt="Dish Image">
-                        <div class="dish--overlay">
-                            <a class="dish-popup" data-toggle="modal" data-target="#dishPopup8"><i class="fa fa-search-plus"></i></a>
-<div class="modal fade" tabindex="-1" role="dialog" id="dishPopup8">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>
-                <div class="row reservation">
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="img-popup">
-                            <img src="assets/images/menu/menu-mixed-grid/8.jpg" alt="dish img">
-                            <div class="img-popup-overlay">
-                                <div class="popup--price">$38.95</div>
-                                <h3 class="popup--title">Dark Coffee</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- .col-md-12 end -->
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="content-popup">
-                            <p>Roast trout, English asparagus, watercress & royals, creamy chesapeake crab dip with artichoke, baked and topped with cheddar cheese, with crusty bread for dipping. creamy chesapeake crab dip with artichoke, baked and topped with cheddar cheese.</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- .row end -->
-
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-                        </div>
-                    </div>
-                    <div class="dish--content">
-                        <h3 class="dish--title">Alder Grilled Seafood Paella</h3>
-                        <span class="dish--price">$19.95</span>
-                        <p class="dish--desc">Oat granola with fresh blueberries, almond, yogurt.</p>
-                    </div>
-                </div>
-                <!-- .dish end -->
-            </div>
-            <!-- .col-md-4 end -->
-            <!-- Dish #3 -->
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <div class="dish-panel">
-                    <div class="dish--img">
-                        <img src="assets/images/menu/gallery/15.jpg" alt="Dish Image">
-                        <div class="dish--overlay">
-                            <a class="dish-popup" data-toggle="modal" data-target="#dishPopup9"><i class="fa fa-search-plus"></i></a>
-<div class="modal fade" tabindex="-1" role="dialog" id="dishPopup9">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>
-                <div class="row reservation">
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="img-popup">
-                            <img src="assets/images/menu/menu-mixed-grid/9.jpg" alt="dish img">
-                            <div class="img-popup-overlay">
-                                <div class="popup--price">$13.95</div>
-                                <h3 class="popup--title">Caffè Macchiato</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- .col-md-12 end -->
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="content-popup">
-                            <p>Pork fillet, ginger, garlic, honey, pepper & canola oil.creamy chesapeake crab dip with artichoke, baked and topped with cheddar cheese, with crusty bread for dipping. creamy chesapeake crab dip with artichoke, baked and topped with cheddar cheese.</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- .row end -->
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-                        </div>
-                    </div>
-                    <div class="dish--content">
-                        <h3 class="dish--title">Chicken Breast</h3>
-                        <span class="dish--price">$14.95</span>
-                        <p class="dish--desc">Applewood smoked bacon, tomatoes & green.</p>
-                    </div>
-                </div>
-                <!-- .dish end -->
-            </div>
-            <!-- .col-md-4 end -->
-            <!-- Dish #4 -->
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <div class="dish-panel">
-                    <div class="dish--img">
-                        <img src="assets/images/menu/gallery/16.jpg" alt="Dish Image">
-                        <div class="dish--overlay">
-                            <a class="dish-popup" data-toggle="modal" data-target="#dishPopup10"><i class="fa fa-search-plus"></i></a>
-<div class="modal fade" tabindex="-1" role="dialog" id="dishPopup10">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>
-                <div class="row reservation">
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="img-popup">
-                            <img src="assets/images/menu/menu-mixed-grid/10.jpg" alt="dish img">
-                            <div class="img-popup-overlay">
-                                <div class="popup--price">$12.95</div>
-                                <h3 class="popup--title">Espresso Coffee</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- .col-md-12 end -->
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="content-popup">
-                            <p>Pork fillet, ginger, garlic, honey, pepper & canola oil.creamy chesapeake crab dip with artichoke, baked and topped with cheddar cheese, with crusty bread for dipping. creamy chesapeake crab dip with artichoke, baked and topped with cheddar cheese.</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- .row end -->
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-                        </div>
-                    </div>
-                    <div class="dish--content">
-                        <h3 class="dish--title">Sea Trout</h3>
-                        <span class="dish--price">$15.95</span>
-                        <p class="dish--desc">Salmon, butter, lemon juice, onion, garlic & salad.</p>
-                    </div>
-                </div>
-                <!-- .dish end -->
-            </div>
-            <!-- .col-md-4 end -->
-            <!-- Dish #5 -->
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <div class="dish-panel">
-                    <div class="dish--img">
-                        <img src="assets/images/menu/gallery/17.jpg" alt="Dish Image">
-                        <div class="dish--overlay">
-                            <a class="dish-popup" data-toggle="modal" data-target="#dishPopup11"><i class="fa fa-search-plus"></i></a>
-<div class="modal fade" tabindex="-1" role="dialog" id="dishPopup11">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>
-                <div class="row reservation">
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="img-popup">
-                            <img src="assets/images/menu/menu-mixed-grid/11.jpg" alt="dish img">
-                            <div class="img-popup-overlay">
-                                <div class="popup--price">$12.95</div>
-                                <h3 class="popup--title">Coffee & Strawberry Jam</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- .col-md-12 end -->
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="content-popup">
-                            <p>Pork fillet, ginger, garlic, honey, pepper & canola oil.creamy chesapeake crab dip with artichoke, baked and topped with cheddar cheese, with crusty bread for dipping. creamy chesapeake crab dip with artichoke, baked and topped with cheddar cheese.</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- .row end -->
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-                        </div>
-                    </div>
-                    <div class="dish--content">
-                        <h3 class="dish--title">Smoked Paprika Hummus</h3>
-                        <span class="dish--price">$12.95</span>
-                        <p class="dish--desc">Baguette, basil, arugula, olives, cherry-tomatoes.</p>
-                    </div>
-                </div>
-                <!-- .dish end -->
-            </div>
-            <!-- .col-md-4 end -->
-            <!-- Dish #6 -->
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <div class="dish-panel">
-                    <div class="dish--img">
-                        <img src="assets/images/menu/gallery/18.jpg" alt="Dish Image">
-                        <div class="dish--overlay">
-                            <a class="dish-popup" data-toggle="modal" data-target="#dishPopup12"><i class="fa fa-search-plus"></i></a>
-<div class="modal fade" tabindex="-1" role="dialog" id="dishPopup12">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>
-                <div class="row reservation">
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="img-popup">
-                            <img src="assets/images/menu/menu-mixed-grid/12.jpg" alt="dish img">
-                            <div class="img-popup-overlay">
-                                <div class="popup--price">$34.95</div>
-                                <h3 class="popup--title">Coffee Latte</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- .col-md-12 end -->
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="content-popup">
-                            <p>Pork fillet, ginger, garlic, honey, pepper & canola oil.creamy chesapeake crab dip with artichoke, baked and topped with cheddar cheese, with crusty bread for dipping. creamy chesapeake crab dip with artichoke, baked and topped with cheddar cheese.</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- .row end -->
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-                        </div>
-                    </div>
-                    <div class="dish--content">
-                        <h3 class="dish--title">Roasted Steak Roulade</h3>
-                        <span class="dish--price">$20.95</span>
-                        <p class="dish--desc">Croissants with strawberries, mascarpone, honey.</p>
-                    </div>
-                </div>
-                <!-- .dish end -->
-            </div>
             <!-- .col-md-12 end -->
         </div>
         <!-- .row end -->
     </div>
-    <!-- .container end -->
-</section>
-<!-- #menu2 end -->
-
-<!-- Divider #1
-============================================= -->
-<section id="divider3" class="section-divider bg-overlay bg-parallax bg-overlay-dark4">
-    <div class="bg-section">
-        <img src="assets/images/background/12.jpg" alt="Background" />
-    </div>
-    <div class="container">
-        <div class="divider--shape-1up"></div>
-        <div class="row clearfix">
-            <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
-                <div class="heading heading-3 text--center">
-                    <p class="heading--subtitle">Starts at 7:00 pm</p>
-                    <h2 class="heading--title mb-0 text-white">Dinner Menu</h2>
-                </div>
-            </div>
-            <!-- .col-md-8 end -->
-        </div>
-        <!-- .row end -->
-        <div class="divider--shape-3down"></div>
-    </div>
-    <!-- .container end -->
-</section>
-<!-- #divider1 end -->
-
-<!-- Menu #2
-============================================= -->
-<section id="menu4" class="menu menu-2 bg-white pb-60">
-    <div class="container">
-        <div class="row">
-            <!-- Dish #1 -->
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <div class="dish-panel">
-                    <div class="dish--img">
-                        <img src="assets/images/menu/gallery/7.jpg" alt="Dish Image">
-                        <div class="dish--overlay">
-                            <a class="dish-popup" data-toggle="modal" data-target="#dishPopup13"><i class="fa fa-search-plus"></i></a>
-<div class="modal fade" tabindex="-1" role="dialog" id="dishPopup13">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>
-                <div class="row reservation">
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="img-popup">
-                            <img src="assets/images/menu/menu-mixed-grid/1.jpg" alt="dish img">
-                            <div class="img-popup-overlay">
-                                <div class="popup--price">$24.95</div>
-                                <h3 class="popup--title">Grilled American Fillet</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- .col-md-12 end -->
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="content-popup">
-                            <p>Pork fillet, ginger, garlic, honey, pepper & canola oil.creamy chesapeake crab dip with artichoke, baked and topped with cheddar cheese, with crusty bread for dipping. creamy chesapeake crab dip with artichoke, baked and topped with cheddar cheese.</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- .row end -->
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-                        </div>
-                    </div>
-                    <div class="dish--content">
-                        <h3 class="dish--title">Grilled Fillet</h3>
-                        <span class="dish--price">$12.95</span>
-                        <p class="dish--desc">eggs, bacon and cherry-tomatoes with bread.</p>
-                    </div>
-                </div>
-                <!-- .dish end -->
-            </div>
-            <!-- .col-md-4 end -->
-            <!-- Dish #2 -->
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <div class="dish-panel">
-                    <div class="dish--img">
-                        <img src="assets/images/menu/gallery/8.jpg" alt="Dish Image">
-                        <div class="dish--overlay">
-                            <a class="dish-popup" data-toggle="modal" data-target="#dishPopup14"><i class="fa fa-search-plus"></i></a>
-<div class="modal fade" tabindex="-1" role="dialog" id="dishPopup14">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>
-                <div class="row reservation">
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="img-popup">
-                            <img src="assets/images/menu/menu-mixed-grid/2.jpg" alt="dish img">
-                            <div class="img-popup-overlay">
-                                <div class="popup--price">$12.95</div>
-                                <h3 class="popup--title">Roast Sea Trout</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- .col-md-12 end -->
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="content-popup">
-                            <p>Roast trout, English asparagus, watercress & royals, creamy chesapeake crab dip with artichoke, baked and topped with cheddar cheese, with crusty bread for dipping. creamy chesapeake crab dip with artichoke, baked and topped with cheddar cheese.</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- .row end -->
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-                        </div>
-                    </div>
-                    <div class="dish--content">
-                        <h3 class="dish--title">Alder Grilled Seafood Paella</h3>
-                        <span class="dish--price">$19.95</span>
-                        <p class="dish--desc">Oat granola with fresh blueberries, almond, yogurt.</p>
-                    </div>
-                </div>
-                <!-- .dish end -->
-            </div>
-            <!-- .col-md-4 end -->
-            <!-- Dish #3 -->
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <div class="dish-panel">
-                    <div class="dish--img">
-                        <img src="assets/images/menu/gallery/9.jpg" alt="Dish Image">
-                        <div class="dish--overlay">
-                            <a class="dish-popup" data-toggle="modal" data-target="#dishPopup15"><i class="fa fa-search-plus"></i></a>
-<div class="modal fade" tabindex="-1" role="dialog" id="dishPopup15">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>
-                <div class="row reservation">
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="img-popup">
-                            <img src="assets/images/menu/menu-mixed-grid/3.jpg" alt="dish img">
-                            <div class="img-popup-overlay">
-                                <div class="popup--price">$12.95</div>
-                                <h3 class="popup--title">Grilled Seafood Paella</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- .col-md-12 end -->
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="content-popup">
-                            <p>Pork fillet, ginger, garlic, honey, pepper & canola oil.creamy chesapeake crab dip with artichoke, baked and topped with cheddar cheese, with crusty bread for dipping. creamy chesapeake crab dip with artichoke, baked and topped with cheddar cheese.</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- .row end -->
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-                        </div>
-                    </div>
-                    <div class="dish--content">
-                        <h3 class="dish--title">Chicken Breast</h3>
-                        <span class="dish--price">$14.95</span>
-                        <p class="dish--desc">Applewood smoked bacon, tomatoes & green.</p>
-                    </div>
-                </div>
-                <!-- .dish end -->
-            </div>
-            <!-- .col-md-4 end -->
-            <!-- Dish #4 -->
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <div class="dish-panel">
-                    <div class="dish--img">
-                        <img src="assets/images/menu/gallery/10.jpg" alt="Dish Image">
-                        <div class="dish--overlay">
-                            <a class="dish-popup" data-toggle="modal" data-target="#dishPopup16"><i class="fa fa-search-plus"></i></a>
-<div class="modal fade" tabindex="-1" role="dialog" id="dishPopup16">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>
-                <div class="row reservation">
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="img-popup">
-                            <img src="assets/images/menu/menu-mixed-grid/4.jpg" alt="dish img">
-                            <div class="img-popup-overlay">
-                                <div class="popup--price">$12.95</div>
-                                <h3 class="popup--title">Chicken Breast</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- .col-md-12 end -->
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="content-popup">
-                            <p>Pork fillet, ginger, garlic, honey, pepper & canola oil.creamy chesapeake crab dip with artichoke, baked and topped with cheddar cheese, with crusty bread for dipping. creamy chesapeake crab dip with artichoke, baked and topped with cheddar cheese.</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- .row end -->
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-                        </div>
-                    </div>
-                    <div class="dish--content">
-                        <h3 class="dish--title">Sea Trout</h3>
-                        <span class="dish--price">$15.95</span>
-                        <p class="dish--desc">Salmon, butter, lemon juice, onion, garlic & salad.</p>
-                    </div>
-                </div>
-                <!-- .dish end -->
-            </div>
-            <!-- .col-md-4 end -->
-            <!-- Dish #5 -->
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <div class="dish-panel">
-                    <div class="dish--img">
-                        <img src="assets/images/menu/gallery/11.jpg" alt="Dish Image">
-                        <div class="dish--overlay">
-                            <a class="dish-popup" data-toggle="modal" data-target="#dishPopup17"><i class="fa fa-search-plus"></i></a>
-<div class="modal fade" tabindex="-1" role="dialog" id="dishPopup17">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>
-                <div class="row reservation">
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="img-popup">
-                            <img src="assets/images/menu/menu-mixed-grid/5.jpg" alt="dish img">
-                            <div class="img-popup-overlay">
-                                <div class="popup--price">$29.95</div>
-                                <h3 class="popup--title">Roasted Steak Roulade</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- .col-md-12 end -->
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="content-popup">
-                            <p>Roast trout, English asparagus, watercress & royals, creamy chesapeake crab dip with artichoke, baked and topped with cheddar cheese, with crusty bread for dipping. creamy chesapeake crab dip with artichoke, baked and topped with cheddar cheese.</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- .row end -->
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-                        </div>
-                    </div>
-                    <div class="dish--content">
-                        <h3 class="dish--title">Smoked Paprika Hummus</h3>
-                        <span class="dish--price">$12.95</span>
-                        <p class="dish--desc">Baguette, basil, arugula, olives, cherry-tomatoes.</p>
-                    </div>
-                </div>
-                <!-- .dish end -->
-            </div>
-            <!-- .col-md-4 end -->
-            <!-- Dish #6 -->
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <div class="dish-panel">
-                    <div class="dish--img">
-                        <img src="assets/images/menu/gallery/12.jpg" alt="Dish Image">
-                        <div class="dish--overlay">
-                            <a class="dish-popup" data-toggle="modal" data-target="#dishPopup19"><i class="fa fa-search-plus"></i></a>
-<div class="modal fade" tabindex="-1" role="dialog" id="dishPopup18">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>
-                <div class="row reservation">
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="img-popup">
-                            <img src="assets/images/menu/menu-mixed-grid/6.jpg" alt="dish img">
-                            <div class="img-popup-overlay">
-                                <div class="popup--price">$34.95</div>
-                                <h3 class="popup--title">Grilled Seafood Paella</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- .col-md-12 end -->
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="content-popup">
-                            <p>Pork fillet, ginger, garlic, honey, pepper & canola oil.creamy chesapeake crab dip with artichoke, baked and topped with cheddar cheese, with crusty bread for dipping. creamy chesapeake crab dip with artichoke, baked and topped with cheddar cheese.</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- .row end -->
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-                        </div>
-                    </div>
-                    <div class="dish--content">
-                        <h3 class="dish--title">Roasted Steak Roulade</h3>
-                        <span class="dish--price">$20.95</span>
-                        <p class="dish--desc">Croissants with strawberries, mascarpone, honey.</p>
-                    </div>
-                </div>
-                <!-- .dish end -->
-            </div>
-            <!-- .col-md-12 end -->
-        </div>
-        <!-- .row end -->
+    <div class="arrow-top">
+        <a href="#heading1"><i class="fa fa-arrow-up"></i></a>
+        <p class="arrow-top-word">top</p>
     </div>
     <!-- .container end -->
 </section>
 <!-- #menu2 end -->
 
-<!-- Divider #1
+<!-- Divider #4 Drinks
 ============================================= -->
 <section id="divider4" class="section-divider bg-overlay bg-parallax bg-overlay-dark4">
     <div class="bg-section">
-        <img src="assets/images/background/13.jpg" alt="Background" />
+        <img src="{% static 'img/dr_bg.jpg' %}" alt="Drinks" />
     </div>
     <div class="container">
         <div class="divider--shape-1up"></div>
@@ -833,7 +297,7 @@
                 <div class="heading heading-3 text--center">
                     <p class="heading--subtitle">Don’t miss</p>
 
-                    <h2 class="heading--title mb-0 text-white">Dessert Menu</h2>
+                    <h2 class="heading--title mb-0 text-white">Drinks Menu</h2>
                 </div>
             </div>
             <!-- .col-md-8 end -->
@@ -843,21 +307,25 @@
     </div>
     <!-- .container end -->
 </section>
-<!-- #divider1 end -->
+<!-- #divider4 end -->
 
-<!-- Menu #2
+<!-- Menu #5 Drinks
 ============================================= -->
 <section id="menu5" class="menu menu-2 bg-white pb-60">
     <div class="container">
         <div class="row">
             <!-- Dish #1 -->
+        {% for category in categories %}
+            {% for item in category.menuitem_set.all %}
+                {% if category.menuitem_set.all %}
+                    {% if category.name == 'Drinks' %}
             <div class="col-xs-12 col-sm-6 col-md-4">
                 <div class="dish-panel">
                     <div class="dish--img">
-                        <img src="assets/images/menu/gallery/19.jpg" alt="Dish Image">
+                        <img src="{{ item.image_dish.url }}" alt="Dish Image">
                         <div class="dish--overlay">
-                            <a class="dish-popup" data-toggle="modal" data-target="#dishPopup19"><i class="fa fa-search-plus"></i></a>
-<div class="modal fade" tabindex="-1" role="dialog" id="dishPopup19">
+                            <a class="dish-popup" data-toggle="modal" data-target="#dishPopup5{{ item.id }}"><i class="fa fa-search-plus"></i></a>
+<div class="modal fade" tabindex="-1" role="dialog" id="dishPopup5{{ item.id }}">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body">
@@ -865,17 +333,17 @@
                 <div class="row reservation">
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="img-popup">
-                            <img src="assets/images/menu/menu-mixed-grid/19.jpg" alt="dish img">
+                            <img src="{{ item.image_dish.url }}" alt="dish img">
                             <div class="img-popup-overlay">
-                                <div class="popup--price">$24.95</div>
-                                <h3 class="popup--title">Homemade croissants</h3>
+                                <div class="popup--price">{{ item.price }}</div>
+                                <h3 class="popup--title">{{ item.name }}</h3>
                             </div>
                         </div>
                     </div>
                     <!-- .col-md-12 end -->
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="content-popup">
-                            <p>Pork fillet, ginger, garlic, honey, pepper & canola oil.creamy chesapeake crab dip with artichoke, baked and topped with cheddar cheese, with crusty bread for dipping. creamy chesapeake crab dip with artichoke, baked and topped with cheddar cheese.</p>
+                            <p class="dish--desc">{{ item.description }}</p>
                         </div>
                     </div>
                 </div>
@@ -890,273 +358,46 @@
                         </div>
                     </div>
                     <div class="dish--content">
-                        <h3 class="dish--title">Beautiful homemade croissants</h3>
-                        <span class="dish--price">$12.95</span>
-                        <p class="dish--desc">eggs, bacon and cherry-tomatoes with bread.</p>
+                        <h3 class="dish--title">{{ item.name }}</h3>
+                        <span class="dish--price" style="right: 10px!important;">{{ item.price }}</span>
+                        <p class="dish--desc">{{ item.ingredients }}</p>
+                        <p class="dish--desc">Calories: {{ item.calories }} kcal</p>
+                        <p class="dish--desc">Cooking time: {{ item.cooking_time }} min</p>
                     </div>
                 </div>
                 <!-- .dish end -->
             </div>
             <!-- .col-md-4 end -->
-            <!-- Dish #2 -->
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <div class="dish-panel">
-                    <div class="dish--img">
-                        <img src="assets/images/menu/gallery/20.jpg" alt="Dish Image">
-                        <div class="dish--overlay">
-                            <a class="dish-popup" data-toggle="modal" data-target="#dishPopup20"><i class="fa fa-search-plus"></i></a>
-<div class="modal fade" tabindex="-1" role="dialog" id="dishPopup20">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>
-                <div class="row reservation">
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="img-popup">
-                            <img src="assets/images/menu/menu-mixed-grid/20.jpg" alt="dish img">
-                            <div class="img-popup-overlay">
-                                <div class="popup--price">$12.95</div>
-                                <h3 class="popup--title">Pain au chocolat</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- .col-md-12 end -->
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="content-popup">
-                            <p>Roast trout, English asparagus, watercress & royals, creamy chesapeake crab dip with artichoke, baked and topped with cheddar cheese, with crusty bread for dipping. creamy chesapeake crab dip with artichoke, baked and topped with cheddar cheese.</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- .row end -->
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-                        </div>
-                    </div>
-                    <div class="dish--content">
-                        <h3 class="dish--title">Blueberry Sweet Rolls</h3>
-                        <span class="dish--price">$19.95</span>
-                        <p class="dish--desc">Oat granola with fresh blueberries, almond, yogurt.</p>
-                    </div>
-                </div>
-                <!-- .dish end -->
-            </div>
-            <!-- .col-md-4 end -->
-            <!-- Dish #3 -->
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <div class="dish-panel">
-                    <div class="dish--img">
-                        <img src="assets/images/menu/gallery/21.jpg" alt="Dish Image">
-                        <div class="dish--overlay">
-                            <a class="dish-popup" data-toggle="modal" data-target="#dishPopup21"><i class="fa fa-search-plus"></i></a>
-<div class="modal fade" tabindex="-1" role="dialog" id="dishPopup21">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>
-                <div class="row reservation">
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="img-popup">
-                            <img src="assets/images/menu/menu-mixed-grid/21.jpg" alt="dish img">
-                            <div class="img-popup-overlay">
-                                <div class="popup--price">$21.95</div>
-                                <h3 class="popup--title">Cannoli with cream cheese</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- .col-md-12 end -->
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="content-popup">
-                            <p>Pork fillet, ginger, garlic, honey, pepper & canola oil.creamy chesapeake crab dip with artichoke, baked and topped with cheddar cheese, with crusty bread for dipping. creamy chesapeake crab dip with artichoke, baked and topped with cheddar cheese.</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- .row end -->
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-                        </div>
-                    </div>
-                    <div class="dish--content">
-                        <h3 class="dish--title">Traditional pancakes</h3>
-                        <span class="dish--price">$14.95</span>
-                        <p class="dish--desc">Applewood smoked bacon, tomatoes & green.</p>
-                    </div>
-                </div>
-                <!-- .dish end -->
-            </div>
-            <!-- .col-md-4 end -->
-            <!-- Dish #4 -->
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <div class="dish-panel">
-                    <div class="dish--img">
-                        <img src="assets/images/menu/gallery/22.jpg" alt="Dish Image">
-                        <div class="dish--overlay">
-                            <a class="dish-popup" data-toggle="modal" data-target="#dishPopup22"><i class="fa fa-search-plus"></i></a>
-<div class="modal fade" tabindex="-1" role="dialog" id="dishPopup22">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>
-                <div class="row reservation">
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="img-popup">
-                            <img src="assets/images/menu/menu-mixed-grid/22.jpg" alt="dish img">
-                            <div class="img-popup-overlay">
-                                <div class="popup--price">$33.95</div>
-                                <h3 class="popup--title">Chocolate Cherry Cake</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- .col-md-12 end -->
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="content-popup">
-                            <p>Pork fillet, ginger, garlic, honey, pepper & canola oil.creamy chesapeake crab dip with artichoke, baked and topped with cheddar cheese, with crusty bread for dipping. creamy chesapeake crab dip with artichoke, baked and topped with cheddar cheese.</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- .row end -->
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-                        </div>
-                    </div>
-                    <div class="dish--content">
-                        <h3 class="dish--title">Chocolate Cherry Cake</h3>
-                        <span class="dish--price">$15.95</span>
-                        <p class="dish--desc">Salmon, butter, lemon juice, onion, garlic & salad.</p>
-                    </div>
-                </div>
-                <!-- .dish end -->
-            </div>
-            <!-- .col-md-4 end -->
-            <!-- Dish #5 -->
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <div class="dish-panel">
-                    <div class="dish--img">
-                        <img src="assets/images/menu/gallery/23.jpg" alt="Dish Image">
-                        <div class="dish--overlay">
-                            <a class="dish-popup" data-toggle="modal" data-target="#dishPopup23"><i class="fa fa-search-plus"></i></a>
-<div class="modal fade" tabindex="-1" role="dialog" id="dishPopup23">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>
-                <div class="row reservation">
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="img-popup">
-                            <img src="assets/images/menu/menu-mixed-grid/23.jpg" alt="dish img">
-                            <div class="img-popup-overlay">
-                                <div class="popup--price">$29.95</div>
-                                <h3 class="popup--title">Blueberry Sweet Rolls</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- .col-md-12 end -->
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="content-popup">
-                            <p>Roast trout, English asparagus, watercress & royals, creamy chesapeake crab dip with artichoke, baked and topped with cheddar cheese, with crusty bread for dipping. creamy chesapeake crab dip with artichoke, baked and topped with cheddar cheese.</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- .row end -->
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-                        </div>
-                    </div>
-                    <div class="dish--content">
-                        <h3 class="dish--title">Pain au chocolat</h3>
-                        <span class="dish--price">$12.95</span>
-                        <p class="dish--desc">Baguette, basil, arugula, olives, cherry-tomatoes.</p>
-                    </div>
-                </div>
-                <!-- .dish end -->
-            </div>
-            <!-- .col-md-4 end -->
-            <!-- Dish #6 -->
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <div class="dish-panel">
-                    <div class="dish--img">
-                        <img src="assets/images/menu/gallery/24.jpg" alt="Dish Image">
-                        <div class="dish--overlay">
-                            <a class="dish-popup" data-toggle="modal" data-target="#dishPopup24"><i class="fa fa-search-plus"></i></a>
-<div class="modal fade" tabindex="-1" role="dialog" id="dishPopup24">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>
-                <div class="row reservation">
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="img-popup">
-                            <img src="assets/images/menu/menu-mixed-grid/24.jpg" alt="dish img">
-                            <div class="img-popup-overlay">
-                                <div class="popup--price">$34.95</div>
-                                <h3 class="popup--title">Traditional pancakes</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- .col-md-12 end -->
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="content-popup">
-                            <p>Pork fillet, ginger, garlic, honey, pepper & canola oil.creamy chesapeake crab dip with artichoke, baked and topped with cheddar cheese, with crusty bread for dipping. creamy chesapeake crab dip with artichoke, baked and topped with cheddar cheese.</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- .row end -->
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-                        </div>
-                    </div>
-                    <div class="dish--content">
-                        <h3 class="dish--title">Cannoli with cream cheese</h3>
-                        <span class="dish--price">$20.95</span>
-                        <p class="dish--desc">Croissants with strawberries, mascarpone, honey.</p>
-                    </div>
-                </div>
-                <!-- .dish end -->
-            </div>
+                {% endif %}
+                {% else %}
+                    <h2 class="no-dihes" style="text-align: center">There are no dishes in this category yet</h2>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+
             <!-- .col-md-12 end -->
         </div>
         <!-- .row end -->
     </div>
+    <div class="arrow-top">
+        <a href="#heading1"><i class="fa fa-arrow-up"></i></a>
+        <p class="arrow-top-word">top</p>
+    </div>
     <!-- .container end -->
 </section>
-<!-- #menu2 end -->
 
-<!-- Divider #1
+<!-- Divider #5 Breakfast
 ============================================= -->
 <section id="divider5" class="section-divider bg-overlay bg-parallax bg-overlay-dark4">
     <div class="bg-section">
-        <img src="assets/images/background/14.jpg" alt="Background" />
+        <img src="{% static 'img/br_bg.jpg' %}" alt="Breakfast" />
     </div>
     <div class="container">
         <div class="divider--shape-1up"></div>
         <div class="row clearfix">
             <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
                 <div class="heading heading-3 text--center">
-                    <p class="heading--subtitle">Enjoy</p>
+                    <p class="heading--subtitle">Good Morning!</p>
                     <h2 class="heading--title mb-0 text-white">Breakfast Menu</h2>
                 </div>
             </div>
@@ -1167,9 +408,9 @@
     </div>
     <!-- .container end -->
 </section>
-<!-- #divider1 end -->
+<!-- #divider5 end -->
 
-<!-- Menu #2
+<!-- Menu #6 Breakfast
 ============================================= -->
 <section id="menu6" class="menu menu-2 bg-white pb-60">
     <div class="container">
@@ -1177,7 +418,6 @@
             <!-- Dish #1 -->
         {% for category in categories %}
             {% for item in category.menuitem_set.all %}
-                {% if not item.stop_list %}
                     {% for meal_type in item.meal_types.all %}
                         {% if meal_type.code == 'breakfast' %}
             <div class="col-xs-12 col-sm-6 col-md-4">
@@ -1185,8 +425,9 @@
                     <div class="dish--img">
                         <img src="{{ item.image_dish.url }}" alt="Dish Image">
                         <div class="dish--overlay">
-                            <a class="dish-popup" data-toggle="modal" data-target="#dishPopup"><i class="fa fa-search-plus"></i></a>
-<div class="modal fade" tabindex="-1" role="dialog" id="dishPopup">
+                            <a class="dish-popup" data-toggle="modal" data-target="#dishPopup6{{ item.id }}"><i class="fa fa-search-plus"></i></a>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="dishPopup6{{ item.id }}">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body">
@@ -1215,6 +456,7 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
+
 <!-- /.modal -->
                         </div>
                     </div>
@@ -1230,20 +472,18 @@
             </div>
                             {% endif %}
                         {% endfor %}
-                    {% endif %}
                 {% endfor %}
             {% endfor %}
             <!-- .col-md-12 end -->
         </div>
         <!-- .row end -->
     </div>
-    <div class="arrow-top" style="display: flex; flex-direction: column; align-items: center">
+    <div class="arrow-top">
         <a href="#heading1"><i class="fa fa-arrow-up"></i></a>
-        <h5>top</h5>
+        <p class="arrow-top-word">top</p>
     </div>
     <!-- .container end -->
 </section>
-<!-- #menu2 end -->
 
 <div class="clearfix"></div>
 

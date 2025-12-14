@@ -10,8 +10,6 @@ def home(request):
     # Для секции New Dishes - берем 2 блюда, помеченных как Новинки
     new_dishes = MenuItem.objects.filter(is_new=True)[:2]
 
-    salad_dishes = MenuItem.objects.filter(category_id=4)
-
     # Если специальных блюд меньше 6, дополняем обычными
     if len(special_dishes) < 6:
         additional_dishes = MenuItem.objects.exclude(is_special=True)[:6 - len(special_dishes)]
@@ -41,7 +39,6 @@ def home(request):
         'new_dishes': new_dishes,
         'menu_categories': menu_categories,
         'category_dishes': category_dishes,
-        'salad_dishes': salad_dishes,
         'reviews': reviews,
         'chefs': chefs,
     }

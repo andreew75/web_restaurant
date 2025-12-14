@@ -7,36 +7,33 @@
             <div class="collapse navbar-collapse pull-left" id="navbar-collapse-2">
               <ul class="nav navbar-nav nav-pos-right navbar-left">
                 <!-- Home Menu -->
-                <li class="has-dropdown mega-dropdown active">
-                  <a href="{% url 'home' %}" data-toggle="dropdown" class="dropdown-toggle menu-item">home</a>
+                <li class="has-dropdown mega-dropdown {% if current_url_name == 'home' %}active{% endif %}">
+                  <a href="{% url 'home' %}" class="dropdown-toggle menu-item">home</a>
                 </li>
                 <!-- li end -->
-
                 <!-- About Menu -->
-                <li class="has-dropdown">
+                <li class="has-dropdown {% if current_url_name == 'home' and current_anchor %}active{% endif %}">
                   <a href="#" data-toggle="dropdown" class="dropdown-toggle menu-item">about</a>
                   <ul class="dropdown-menu">
-                    <li>
-                      <a data-scroll="scrollTo" href="{% url 'home' %}#banner5">our story</a>
+                    <li {% if current_anchor == 'banner5' %}class="active"{% endif %}>
+                      <a href="{% url 'home' %}#banner5">our story</a>
                     </li>
-                    <li>
-                      <a data-scroll="scrollTo" href="{% url 'home' %}#team1">our chefs</a>
+                    <li {% if current_anchor == 'team1' %}class="active"{% endif %}>
+                      <a href="{% url 'home' %}#team1">our chefs</a>
                     </li>
-                    <li>
-                      <a data-scroll="scrollTo" href="{% url 'home' %}#footer">contact us</a>
+                    <li {% if current_anchor == 'footer' %}class="active"{% endif %}>
+                      <a href="{% url 'home' %}#footer">contact us</a>
                     </li>
                   </ul>
                 </li>
                 <!-- li end -->
-
                 <!-- Menu Menu -->
-                <li>
-                  <a class="menu-item" href="{% url 'menu:list' %}">Menu</a>
+                <li {% if current_url_namespace == 'menu' and current_url_name == 'list' %}class="active"{% endif %}>
+                  <a class="menu-item" href="{% url 'menu:list' %}">menu</a>
                 </li>
                 <!-- li end -->
-
-                <!-- Features Menu-->
-                <li>
+                <!-- Evens Menu-->
+                <li {% if current_url_namespace == 'events' and current_url_name == 'list' %}class="active"{% endif %}>
                   <a class="menu-item" href="{% url 'events:list' %}">events</a>
                 </li>
                 <!-- li end -->
@@ -59,14 +56,13 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse pull-right" id="navbar-collapse-1">
               <ul class="nav navbar-nav nav-pos-right navbar-left">
-                <li>
+                <li {% if current_url_namespace == 'gallery' and current_url_name == 'list' %}class="active"{% endif %}>
                   <a class="menu-item" href="{% url 'gallery:list' %}">gallery</a>
                 </li>
                 <!-- li end -->
-
                 <!-- Blog Menu-->
-                <li>
-                  <a class="menu-item" href="{% url 'blog:list' %}">Blog</a>
+                <li {% if current_url_namespace == 'blog' and current_url_name == 'list' %}class="active"{% endif %}>
+                  <a class="menu-item" href="{% url 'blog:list' %}">blog</a>
                 </li>
                 <!-- li end -->
 

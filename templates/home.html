@@ -158,97 +158,32 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div id="testimonial-carousel" class="carousel carousel-dots carousel-white" data-slide="3"  data-slide-rs="1" data-autoplay="true" data-nav="false" data-dots="true" data-space="30" data-loop="true" data-speed="800">
                     <!-- Testimonial #1 -->
+                    {% for review in reviews %}
                     <div class="testimonial-panel">
                         <div class="testimonial--rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
+                            {{ review.get_stars|safe }}
                         </div>
                         <!-- .testimonial-rating end -->
                         <div class="testimonial--body">
-                            <p>“ Granny is simply the best. Great Food, nice atmosphere and very reasonable prices. It just doesn't get any better ”</p>
+                            <p>“{{ review.text|truncatechars:300 }}”</p>
                         </div>
                         <!-- .testimonial-body end -->
                         <div class="testimonial--meta">
+                            {% if review.image %}
+                            <div class="testimonial--img">
+                                <img src="{{ review.image.url }}"
+                                     alt="{{ review.author }}">
+                            </div>
+                            {% endif %}
                             <div class="testimonial--author">
-                                <h4>- Todd Stephen</h4>
+                                <h4>- {{ review.author }}</h4>
+                                <span class="date">{{ review.created_at|date:"d.m.Y" }}</span>
                             </div>
                         </div>
                         <!-- .testimonial-meta end -->
                     </div>
+                    {% endfor %}
                     <!-- .testimonial-panel end -->
-
-                    <!-- Testimonial #2 -->
-                    <div class="testimonial-panel">
-                        <div class="testimonial--rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <!-- .testimonial-rating end -->
-                        <div class="testimonial--body">
-                            <p>“ We've been to Granny many times over the years. We know what to expect: great food and awesome prices ”</p>
-                        </div>
-                        <!-- .testimonial-body end -->
-                        <div class="testimonial--meta">
-                            <div class="testimonial--author">
-                                <h4>- David Casper</h4>
-                            </div>
-                        </div>
-                        <!-- .testimonial-meta end -->
-                    </div>
-                    <!-- .testimonial-panel end -->
-
-                    <!-- Testimonial #3 -->
-                    <div class="testimonial-panel">
-                        <div class="testimonial--rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <!-- .testimonial-rating end -->
-                        <div class="testimonial--body">
-                            <p>“ The reasonable prices, the great atmosphere are only topped by the delicious food. Keep up the great work ”</p>
-                        </div>
-                        <!-- .testimonial-body end -->
-                        <div class="testimonial--meta">
-                            <div class="testimonial--author">
-                                <h4>- John Arax</h4>
-                            </div>
-                        </div>
-                        <!-- .testimonial-meta end -->
-                    </div>
-                    <!-- .testimonial-panel end -->
-
-                    <!-- Testimonial #4 -->
-                    <div class="testimonial-panel">
-                        <div class="testimonial--rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <!-- .testimonial-rating end -->
-                        <div class="testimonial--body">
-                            <p>“ Granny is simply the best. Great Food, nice atmosphere and very reasonable prices. It just doesn't get any better ”</p>
-                        </div>
-                        <!-- .testimonial-body end -->
-                        <div class="testimonial--meta">
-                            <div class="testimonial--author">
-                                <h4>- Anthony Kevin</h4>
-                            </div>
-                        </div>
-                        <!-- .testimonial-meta end -->
-                    </div>
-                    <!-- .testimonial-panel end -->
-
                 </div>
             </div>
             <!-- .col-md-12 end -->
@@ -330,7 +265,7 @@
           <!-- .row end -->
           <div class="row">
             <!-- Teams -->
-              {% for chef in chefs %}
+            {% for chef in chefs %}
             <div class="col-xs-12 col-sm-6 col-md-3">
               <div class="member">
                 <div class="member-img">
@@ -339,9 +274,9 @@
                     <div class="member-hover">
                       <div class="pos-vertical-center">
                         <div class="member-social">
-                          <a href="#"><i class="fa fa-facebook"></i></a>
-                          <a href="#"><i class="fa fa-twitter"></i></a>
-                          <a href="#"><i class="fa fa-instagram"></i></a>
+                          <a target="_blank" href="{{ chef.social_url_1 }}"><i class="fa fa-vk"></i></a>
+                          <a target="_blank" href="{{ chef.social_url_2 }}"><i class="fa fa-youtube-play"></i></a>
+                          <a target="_blank" href="{{ chef.social_url_3 }}"><i class="fa fa-instagram"></i></a>
                         </div>
                         <!-- .memebr-social end -->
                         <div class="member-desc">
@@ -366,7 +301,7 @@
               <!-- .member end -->
             </div>
             <!-- .col-md-3 end -->
-              {% endfor %}
+            {% endfor %}
 
           </div>
         </div>

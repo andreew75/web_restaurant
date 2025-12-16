@@ -6,9 +6,8 @@ from menu.models import MenuItem, Category, MealType
 @admin.register(MenuItem)
 class MenuItemAdmin(admin.ModelAdmin):
     list_filter = ('category', 'stop_list', 'is_special', 'is_new', 'meal_types')
-
     list_display = ('name', 'category', 'price', 'stop_list', 'is_special', 'is_new')
-
+    list_editable = ('stop_list', 'is_special', 'is_new')
     search_fields = ('name', 'description', 'ingredients')
 
     # Группировка полей в форме редактирования

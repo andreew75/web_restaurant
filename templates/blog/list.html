@@ -110,17 +110,13 @@
                                         <span aria-hidden="true">&laquo;</span>
                                     </a>
                                 </li>
-                            {% else %}
-                                <li class="disabled">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </li>
                             {% endif %}
 
                             {% comment %} Номера страниц {% endcomment %}
                             {% for num in posts.paginator.page_range %}
                                 {% if posts.number == num %}
                                     <li class="active"><a>{{ num }}</a></li>
-                                {% elif num > posts.number|add:-3 and num < posts.number|add:3 %}
+                                {% elif num >= posts.number|add:-2 and num <= posts.number|add:2 %}
                                     <li>
                                         <a href="?page={{ num }}{% if query %}&q={{ query }}{% endif %}#blog">{{ num }}</a>
                                     </li>
@@ -134,10 +130,6 @@
                                        aria-label="Next">
                                         <span aria-hidden="true">&raquo;</span>
                                     </a>
-                                </li>
-                            {% else %}
-                                <li class="disabled">
-                                    <span aria-hidden="true">&raquo;</span>
                                 </li>
                             {% endif %}
                         </ul>
@@ -182,7 +174,7 @@
                     {{ post.created_at|date:"d.m.Y" }}
                 </div>
                 <div class="entry-title">
-                    <a href="#">{{ post.title }}</a>
+                    <a href="{% url 'blog:detail' post.id %}">{{ post.title }}</a>
                 </div>
             </div>
         </div>

@@ -10,6 +10,9 @@ class Chef(models.Model):
     specialty = models.CharField(max_length=100, verbose_name='Специализация')
     is_active = models.BooleanField(default=True, verbose_name='Активный сотрудник')
     order = models.IntegerField(default=0, verbose_name='Порядок отображения')
+    social_url_1 = models.CharField(max_length=100, blank=True, verbose_name='Соцсеть')
+    social_url_2 = models.CharField(max_length=100, blank=True, verbose_name='Соцсеть')
+    social_url_3 = models.CharField(max_length=100, blank=True, verbose_name='Соцсеть')
 
     class Meta:
         verbose_name = 'Шеф-повар'

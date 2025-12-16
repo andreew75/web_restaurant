@@ -30,7 +30,7 @@ def home(request):
         category.menu_items = MenuItem.objects.filter(category=category)[:6]
 
         # Секция Testimonials - отзывы клиентов
-    reviews = Review.objects.filter(is_published=True)[:3]
+    reviews = Review.objects.filter(is_published=True)[:6]
     # Секция Shes - команда
     chefs = Chef.objects.filter(is_active=True).order_by('order')[:4]
 
@@ -46,5 +46,5 @@ def home(request):
     return render(request, 'home.html', context)
 
 
-def reviews(request):
+def send_reviews(request):
     return render(request, 'reviews.html')

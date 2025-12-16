@@ -56,7 +56,7 @@
                                 </div>
                                 <div class="entry--title">
                                     <h3>{{ event.title }}</h3>
-                                    <p style="font-size: 18px"><b>Start in {{ event.start_time|time:"H:i" }}</b></p>
+                                    <p style="font-size: 16px; color: #c59d5f"><b>Start in {{ event.start_time|time:"H:i" }}</b></p>
                                 </div>
 
                                 <div class="entry--bio">
@@ -89,8 +89,6 @@
                         <ul class="pagination">
                             {% if events.has_previous %}
                                 <li><a href="?page={{ events.previous_page_number }}#blog">&laquo;</a></li>
-                            {% else %}
-                                <span aria-hidden="true">&laquo;</span>
                             {% endif %}
 
                             {% for i in events.paginator.page_range %}
@@ -103,8 +101,6 @@
 
                             {% if events.has_next %}
                                 <li><a href="?page={{ events.next_page_number }}#blog">&raquo;</a></li>
-                            {% else %}
-                                <li class="disabled"><span>&raquo;</span></li>
                             {% endif %}
                         </ul>
                     </div>

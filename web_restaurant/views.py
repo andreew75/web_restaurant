@@ -1,7 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from menu.models import Category, MenuItem
 from reviews.models import Review
 from chefs.models import Chef
+from django.contrib import messages
+from reviews.forms import ReviewForm
+from django.core.paginator import Paginator
 
 
 def home(request):
@@ -46,5 +49,35 @@ def home(request):
     return render(request, 'home.html', context)
 
 
-def send_reviews(request):
-    return render(request, 'reviews.html')
+def reviews_page(request):
+    """Страница с формой отправки отзыва и списком отзывов"""
+
+    # Форма для отправки нового отзыва
+    if request.method == 'POST':
+        form = ReviewForm(request.POST, request.FILES)
+        if form.is_valid():
+            # Сохраняем отзыв, но не публикуем сразу
+            review = form.save(commit=False)
+            review.is_published = False  # Требует модерации
+            review.save()
+
+            messages.success(request, 'Спасибо за ваш отзыв! Он будет опубликован после проверки.')
+            return redirect('reviews')
+    else:
+        form = ReviewForm()
+
+    # Получаем опубликованные отзывы для отображения
+    published_reviews = Review.objects.filter(is_published=True).order_by('-created_at')
+
+    # Пагинация (например, по 5 отзывов на странице)
+    paginator = Paginator(published_reviews, 5)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    context = {
+        'form': form,
+        'page_obj': page_obj,
+        'reviews': page_obj.object_list,
+    }
+
+    return render(request, 'reviews.html', context)

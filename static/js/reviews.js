@@ -44,3 +44,5 @@ document.addEventListener('DOMContentLoaded', function() {
         checkedStar.dispatchEvent(new Event('change'));
     }
 });
+
+// PopUP massage

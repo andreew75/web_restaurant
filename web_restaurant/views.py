@@ -61,23 +61,30 @@ def reviews_page(request):
             review.is_published = False  # Требует модерации
             review.save()
 
-            messages.success(request, 'Спасибо за ваш отзыв! Он будет опубликован после проверки.')
-            return redirect('reviews')
+            # messages.success(request, 'Спасибо за ваш отзыв! Он будет опубликован после проверки.')
+            return render(request, 'reviews.html', {
+                'form': ReviewForm(),
+                'success': True,
+                'show_modal': True,
+            })
     else:
         form = ReviewForm()
 
-    # Получаем опубликованные отзывы для отображения
-    published_reviews = Review.objects.filter(is_published=True).order_by('-created_at')
-
-    # Пагинация (например, по 5 отзывов на странице)
-    paginator = Paginator(published_reviews, 5)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
+    # # Получаем опубликованные отзывы для отображения
+    # published_reviews = Review.objects.filter(is_published=True).order_by('-created_at')
+    #
+    # # Пагинация (например, по 5 отзывов на странице)
+    # paginator = Paginator(published_reviews, 5)
+    # page_number = request.GET.get('page')
+    # page_obj = paginator.get_page(page_number)
 
     context = {
         'form': form,
-        'page_obj': page_obj,
-        'reviews': page_obj.object_list,
+        'success': False,
+        'show_modal': False,
+
+        # 'page_obj': page_obj,
+        # 'reviews': page_obj.object_list,
     }
 
     return render(request, 'reviews.html', context)

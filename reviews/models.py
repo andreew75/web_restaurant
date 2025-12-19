@@ -21,8 +21,7 @@ class Review(models.Model):
     )
     image = models.ImageField(
         upload_to='reviews_images/',
-        blank=True,
-        null=True,
+        default='reviews_images/default.png',
         verbose_name='Фото автора'
     )
     is_published = models.BooleanField(default=True, verbose_name='Опубликовано')

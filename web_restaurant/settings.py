@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'gallery.apps.GalleryConfig',
     'reviews.apps.ReviewsConfig',
     'chefs.apps.ChefsConfig',
+    'reservations.apps.ReservationsConfig',
+    'django_recaptcha',
 ]
 
 MIDDLEWARE = [
@@ -68,6 +70,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'web_restaurant.context_processors.nav_active',
+                'web_restaurant.context_processors.reservation_form_context'
             ],
         },
     },
@@ -133,3 +136,31 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+RECAPTCHA_PUBLIC_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'
+RECAPTCHA_PRIVATE_KEY = '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe'
+
+# Удалить после завершения разработки
+RECAPTCHA_TESTING = True
+SILENCED_SYSTEM_CHECKS = ['django_recaptcha.recaptcha_test_key_error']
+# Настройки email для разработки
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 25
+DEFAULT_FROM_EMAIL = 'anline75@gmail.com'
+SERVER_EMAIL = 'noreply@gmail.com'
+
+# # Для реальной отправки через SMTP:
+# """
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'  # Или ваш SMTP сервер
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = 'ваш_email@gmail.com'
+# EMAIL_HOST_PASSWORD = 'ваш_пароль_приложения'  # Для Gmail: пароль приложения
+# DEFAULT_FROM_EMAIL = 'restaurant@вашдомен.com'
+# """
+
+# Название сайта для email
+SITE_NAME = 'Saffron'
+SITE_URL = 'http://localhost:8000'  # Для продакшена измените на реальный домен

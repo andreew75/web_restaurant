@@ -103,11 +103,33 @@
                     <!-- Фото (опционально) -->
                     <div class="col-xs-12 col-sm-12 col-md-12 mt-3 text-form-photo" style="margin-top: 20px">
                         <label for="id_image" class="form-label">Your photo (optional)</label>
-                        <input type="file"
-                               class="btn btn--primary btn--bordered"
-                               name="image"
-                               id="id_image"
-                               accept="image/*">
+                        {{ form.image }}
+                        <div class="upload-photo">
+                            <!-- Кнопка, которая меняет содержимое -->
+                            <label for="id_image" class="btn btn--primary btn--bordered" id="uploadButton" style="height: 55px;">
+                                <span class="btn-content">
+                                    <!-- Исходное состояние -->
+                                    <span class="btn-default-primary">
+                                        Upload Photo
+                                    </span>
+
+                                    <!-- Состояние после выбора файла (скрыто по умолчанию) -->
+                                    <span class="btn-selected" style="display: none;">
+                                        <i class="fa-solid fa-check-circle me-2"></i>
+                                        <span class="file-details">
+                                            <span class="file-name" id="fileName"></span>
+                                            <span class="file-size" id="fileSize"></span>
+                                        </span>
+                                    </span>
+                                </span>
+                            </label>
+                            <p class="file-hint">JPG, PNG or GIF (Max 5MB)</p>
+                        </div>
+                        {% if form.image.errors %}
+                        <div class="text-danger small">
+                            {{ form.image.errors }}
+                        </div>
+                        {% endif %}
                     </div>
 
                     <!-- Согласие -->

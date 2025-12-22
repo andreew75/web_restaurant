@@ -4,7 +4,7 @@ from reviews.models import Review
 from chefs.models import Chef
 from django.contrib import messages
 from reviews.forms import ReviewForm
-from django.core.paginator import Paginator
+from django.http import JsonResponse
 
 
 def home(request):
@@ -61,7 +61,7 @@ def reviews_page(request):
             review.is_published = False  # Требует модерации
             review.save()
 
-            # messages.success(request, 'Спасибо за ваш отзыв! Он будет опубликован после проверки.')
+            # messages.success
             return render(request, 'reviews.html', {
                 'form': ReviewForm(),
                 'success': True,
@@ -69,14 +69,6 @@ def reviews_page(request):
             })
     else:
         form = ReviewForm()
-
-    # # Получаем опубликованные отзывы для отображения
-    # published_reviews = Review.objects.filter(is_published=True).order_by('-created_at')
-    #
-    # # Пагинация (например, по 5 отзывов на странице)
-    # paginator = Paginator(published_reviews, 5)
-    # page_number = request.GET.get('page')
-    # page_obj = paginator.get_page(page_number)
 
     context = {
         'form': form,

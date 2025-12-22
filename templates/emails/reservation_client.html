@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Подтверждение бронирования</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background-color: #d4a762;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px 5px 0 0;
+        }
+        .content {
+            background-color: #f9f9f9;
+            padding: 30px;
+            border-radius: 0 0 5px 5px;
+            border: 1px solid #ddd;
+        }
+        .details {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border-left: 4px solid #d4a762;
+        }
+        .footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+        }
+        .booking-id {
+            font-size: 24px;
+            font-weight: bold;
+            color: #d4a762;
+            margin: 10px 0;
+        }
+        .contact-info {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Бронирование принято!</h1>
+    </div>
+    
+    <div class="content">
+        <p>Уважаемый(ая) <strong>{{ reservation.name }}</strong>,</p>
+        
+        <p>Мы получили вашу заявку на бронирование столика в нашем ресторане!</p>
+        
+        <div class="details">
+            <div class="booking-id">Номер брони: #{{ reservation.id }}</div>
+            
+            <p><strong>Детали вашей заявки:</strong></p>
+            <ul>
+                <li><strong>Дата визита:</strong> {{ reservation.visit_date }}</li>
+                <li><strong>Время:</strong> {{ reservation.visit_time }}</li>
+                <li><strong>Количество гостей:</strong> {{ reservation.get_guests_display }}</li>
+                <li><strong>Контактный телефон:</strong> {{ reservation.phone }}</li>
+                {% if reservation.special_request %}
+                <li><strong>Ваши пожелания:</strong> {{ reservation.special_request }}</li>
+                {% endif %}
+            </ul>
+        </div>
+        
+        <p><strong>В ближайшее время с вами свяжется администратор для подтверждения брони.</strong></p>
+        
+        <div class="contact-info">
+            <p><strong>Контакты ресторана:</strong></p>
+            <p>Телефон: [НОМЕР ТЕЛЕФОНА]</p>
+            <p>Адрес: [АДРЕС РЕСТОРАНА]</p>
+            <p>Email: [EMAIL РЕСТОРАНА]</p>
+        </div>
+        
+        <p>Если у вас есть вопросы или вы хотите изменить детали бронирования, пожалуйста, свяжитесь с нами.</p>
+        
+        <p>Ждем вас в нашем ресторане!</p>
+        
+        <p>С уважением,<br>
+        <strong>Команда ресторана</strong></p>
+    </div>
+    
+    <div class="footer">
+        <p>Это автоматическое уведомление. Пожалуйста, не отвечайте на это письмо.</p>
+        <p>Вы получили это письмо, потому что оставили заявку на бронирование на нашем сайте.</p>
+        <p>© {% now "Y" %} [НАЗВАНИЕ РЕСТОРАНА]. Все права защищены.</p>
+    </div>
+</body>
+</html>

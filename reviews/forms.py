@@ -61,8 +61,21 @@ class ReviewForm(forms.ModelForm):
 
     class Meta:
         model = Review
-        fields = ['first_name', 'last_name', 'email', 'text', 'rating', 'agree']
-        exclude = ['author', 'image', 'is_published']
+        fields = ['first_name', 'last_name', 'email', 'text', 'rating', 'image', 'agree']
+        exclude = ['author', 'is_published']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        # Настраиваем поле image из модели (не переопределяем отдельно)
+        self.fields['image'].required = False
+        self.fields['image'].label = 'Your photo'
+        self.fields['image'].widget.attrs.update({
+            'class': 'simple-file-input',
+            'id': 'id_image',
+            'accept': 'image/*',
+            'style': 'display: none;'
+        })
 
     def clean(self):
         cleaned_data = super().clean()

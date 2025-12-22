@@ -30,4 +30,5 @@ urlpatterns = [
     path('blog/', include('blog.urls', namespace='blog')),
     path('events/', include('events.urls', namespace='events')),
     path('gallery/', include('gallery.urls', namespace='gallery')),
+    path('reservations/', include('reservations.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -12694,3 +12694,80 @@ scroll-behavior: smooth;
 .fa-arrow-up:hover {
 	transform: translateY(-10px);
 }
+
+/* Стили для загрузки фото */
+.upload-photo {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    margin: 20px;
+}
+
+.simple-file-input {
+    position: absolute;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
+}
+
+/* Контент кнопки */
+.btn-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 24px;
+}
+
+/* Состояние с выбранным файлом */
+.btn-selected {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    color: #c59d5f;
+}
+
+.btn-selected i {
+    font-size: 18px;
+}
+
+.file-details {
+    display: flex;
+    align-items: flex-start;
+    margin-left: 10px;
+    text-align: left;
+    max-width: calc(100% - 50px);
+    gap: 15px;
+}
+
+.file-name {
+    font-weight: 600;
+    font-size: 14px;
+    color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    display: block;
+}
+
+.file-size {
+    font-size: 12px;
+    color: #6c757d;
+    margin-top: 2px;
+}
+
+.file-hint {
+    font-size: 12px;
+    color: #6c757d;
+    margin-top: 5px;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+/* Анимация при смене состояния */
+.btn-default-primary, .btn-selected {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}

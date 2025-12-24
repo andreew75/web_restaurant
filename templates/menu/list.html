@@ -118,14 +118,23 @@
                         <div class="dish--content">
                             <h3 class="dish--title">{{ item.name }}</h3>
                             <span class="dish--price" style="right: 10px!important;">{{ item.price }}</span>
-                            <p class="dish--desc">{{ item.ingredients }}</p>
+                            <p class="dish--desc" style="height: 40px!important; line-height: 18px!important;">{{ item.ingredients }}</p>
                             {% if item.calories %}
-                            <p class="dish--desc">Calories: {{ item.calories }} kcal</p>
+                            <p class="dish--calories" style="font-size: 14px; font-weight: bold; margin-bottom: 0; margin-top: 10px">Calories: {{ item.calories }} kcal</p>
                             {% endif %}
                             {% if item.cooking_time %}
-                            <p class="dish--desc">Cooking time: {{ item.cooking_time }} min</p>
+                            <p class="dish--time" style="font-size: 14px; font-weight: bold">Cooking time: {{ item.cooking_time }} min</p>
                             {% endif %}
                         </div>
+                        {% if item.is_delivery %}
+                        <div class="button-delivery" style="display: flex; justify-content: center">
+                           <a class="btn btn--primary delivery" href="#">Deliver</a>
+                        </div>
+                        {% else %}
+                        <div class="shop-only-now">
+                            <h5 class="only-now" style="margin: 0">Only Now</h5>
+                        </div>
+                        {% endif %}
                     </div>
                 </div>
                     {% endif %}
@@ -259,9 +268,22 @@
                         <h3 class="dish--title">{{ item.name }}</h3>
                         <span class="dish--price" style="right: 10px!important;">{{ item.price }}</span>
                         <p class="dish--desc">{{ item.ingredients }}</p>
-                        <p class="dish--desc">Calories: {{ item.calories }} kcal</p>
-                        <p class="dish--desc">Cooking time: {{ item.cooking_time }} min</p>
+                        {% if item.calories %}
+                        <p class="dish--calories" style="font-size: 14px; font-weight: bold; margin-bottom: 0; margin-top: 10px">Calories: {{ item.calories }} kcal</p>
+                        {% endif %}
+                        {% if item.cooking_time %}
+                        <p class="dish--time" style="font-size: 14px; font-weight: bold">Cooking time: {{ item.cooking_time }} min</p>
+                        {% endif %}
                     </div>
+                    {% if item.is_delivery %}
+                    <div class="button-delivery" style="display: flex; justify-content: center">
+                        <a class="btn btn--primary delivery" href="#">Deliver</a>
+                    </div>
+                    {% else %}
+                    <div class="shop-only-now">
+                         <h5 class="only-now" style="margin: 0">Only Now</h5>
+                    </div>
+                    {% endif %}
                 </div>
                 <!-- .dish end -->
             </div>
@@ -361,9 +383,22 @@
                         <h3 class="dish--title">{{ item.name }}</h3>
                         <span class="dish--price" style="right: 10px!important;">{{ item.price }}</span>
                         <p class="dish--desc">{{ item.ingredients }}</p>
-                        <p class="dish--desc">Calories: {{ item.calories }} kcal</p>
-                        <p class="dish--desc">Cooking time: {{ item.cooking_time }} min</p>
+                        {% if item.calories %}
+                        <p class="dish--calories" style="font-size: 14px; font-weight: bold; margin-bottom: 0; margin-top: 10px">Calories: {{ item.calories }} kcal</p>
+                        {% endif %}
+                        {% if item.cooking_time %}
+                        <p class="dish--time" style="font-size: 14px; font-weight: bold">Cooking time: {{ item.cooking_time }} min</p>
+                        {% endif %}
                     </div>
+                    {% if item.is_delivery %}
+                    <div class="button-delivery" style="display: flex; justify-content: center">
+                        <a class="btn btn--primary delivery" href="#">Deliver</a>
+                    </div>
+                    {% else %}
+                    <div class="shop-only-now">
+                         <h5 class="only-now" style="margin: 0">Only Now</h5>
+                    </div>
+                    {% endif %}
                 </div>
                 <!-- .dish end -->
             </div>

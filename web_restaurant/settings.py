@@ -156,9 +156,9 @@ SERVER_EMAIL = 'noreply@gmail.com'
 # EMAIL_HOST = 'smtp.gmail.com'  # Или ваш SMTP сервер
 # EMAIL_PORT = 587
 # EMAIL_USE_TLS = True
-# EMAIL_HOST_USER = 'ваш_email@gmail.com'
-# EMAIL_HOST_PASSWORD = 'ваш_пароль_приложения'  # Для Gmail: пароль приложения
-# DEFAULT_FROM_EMAIL = 'restaurant@вашдомен.com'
+# EMAIL_HOST_USER = 'anline75@gmail.com'
+# EMAIL_HOST_PASSWORD = ''  # Для Gmail: пароль приложения
+# DEFAULT_FROM_EMAIL = 'restaurant@saffron.com'
 # """
 
 # Название сайта для email

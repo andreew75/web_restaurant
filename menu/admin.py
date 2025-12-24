@@ -1,13 +1,13 @@
-
 from django.contrib import admin
 from menu.models import MenuItem, Category, MealType
+from django.utils.safestring import mark_safe
 
 
 @admin.register(MenuItem)
 class MenuItemAdmin(admin.ModelAdmin):
     list_filter = ('category', 'stop_list', 'is_special', 'is_new', 'meal_types')
-    list_display = ('name', 'category', 'price', 'stop_list', 'is_special', 'is_new')
-    list_editable = ('stop_list', 'is_special', 'is_new')
+    list_display = ('name', 'category', 'price', 'stop_list', 'is_special', 'is_new', 'is_delivery', 'view_image')
+    list_editable = ('stop_list', 'is_special', 'is_new', 'is_delivery')
     search_fields = ('name', 'description', 'ingredients')
 
     # Группировка полей в форме редактирования
@@ -23,6 +23,13 @@ class MenuItemAdmin(admin.ModelAdmin):
                        'is_special', 'is_new', 'stop_list')
         }),
     )
+
+    def view_image(self, obj):
+        if obj.image_dish:
+            return mark_safe(f"<img src='{obj.image_dish.url}' alt='{obj.name}' width='50'/>")
+        return None
+
+    view_image.short_description = 'Photo'
 
 
 @admin.register(Category)

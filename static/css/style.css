@@ -4640,7 +4640,7 @@ Header Customaztion
 .header-11 .navbar-header > .logo {
 	position: absolute;
 	left: 50%;
-	margin-left: -74px;
+	margin-left: -115px;
 	margin-top: -10px;
 }
 
@@ -12770,4 +12770,14 @@ scroll-behavior: smooth;
 /* Анимация при смене состояния */
 .btn-default-primary, .btn-selected {
     transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.shop-only-now {
+	display: flex;
+	justify-content: center;
+	margin-top: 30px;
+}
+
+.order-cart {
+	width: 30px;
 }

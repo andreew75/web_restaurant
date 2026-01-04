@@ -13,8 +13,8 @@ class Event(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Event Created At")
 
     class Meta:
-        verbose_name = "Event"
-        verbose_name_plural = "Events"
+        verbose_name = "События"
+        verbose_name_plural = "События"
         ordering = ['-date']
 
     def __str__(self):

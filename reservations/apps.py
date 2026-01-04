@@ -6,4 +6,4 @@ class ReservationsConfig(AppConfig):
     name = 'reservations'
 
     def ready(self):
-        from reservations import signals
+        import reservations.signals  # noqa

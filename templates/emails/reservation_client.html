@@ -57,48 +57,46 @@
 </head>
 <body>
     <div class="header">
-        <h1>Бронирование принято!</h1>
+        <h1>Бронирование подтвержедено!</h1>
     </div>
     
     <div class="content">
         <p>Уважаемый(ая) <strong>{{ reservation.name }}</strong>,</p>
         
-        <p>Мы получили вашу заявку на бронирование столика в нашем ресторане!</p>
+        <p>Мы получили Вашу заявку на бронирование столика в ресторане Saffron!</p>
+
+        <h2><strong>Ваше бронирование подтвержедено администратором ресторана!</strong></h2>
+        <p><strong>Ждем Вас в нашем ресторане {{ reservation.visit_date|date:"d.m.Y" }} в {{ reservation.visit_time|date:"H:i" }}!</strong></p>
         
         <div class="details">
             <div class="booking-id">Номер брони: #{{ reservation.id }}</div>
             
-            <p><strong>Детали вашей заявки:</strong></p>
+            <p><strong>Детали Вашей заявки:</strong></p>
             <ul>
-                <li><strong>Дата визита:</strong> {{ reservation.visit_date }}</li>
-                <li><strong>Время:</strong> {{ reservation.visit_time }}</li>
-                <li><strong>Количество гостей:</strong> {{ reservation.get_guests_display }}</li>
+                <li><strong>Дата визита:</strong> {{ reservation.visit_date|date:"d.m.Y" }}</li>
+                <li><strong>Время:</strong> {{ reservation.visit_time|date:"H:i" }}</li>
+                <li><strong>Количество гостей:</strong> {{ reservation.guests }}</li>
                 <li><strong>Контактный телефон:</strong> {{ reservation.phone }}</li>
                 {% if reservation.special_request %}
                 <li><strong>Ваши пожелания:</strong> {{ reservation.special_request }}</li>
                 {% endif %}
             </ul>
         </div>
-        
-        <p><strong>В ближайшее время с вами свяжется администратор для подтверждения брони.</strong></p>
-        
+
+        <p>Если у Вас есть вопросы или Вы хотите изменить детали бронирования, пожалуйста, свяжитесь с нами.</p>
+
         <div class="contact-info">
             <p><strong>Контакты ресторана:</strong></p>
             <p>Телефон: [НОМЕР ТЕЛЕФОНА]</p>
             <p>Адрес: [АДРЕС РЕСТОРАНА]</p>
             <p>Email: [EMAIL РЕСТОРАНА]</p>
         </div>
-        
-        <p>Если у вас есть вопросы или вы хотите изменить детали бронирования, пожалуйста, свяжитесь с нами.</p>
-        
-        <p>Ждем вас в нашем ресторане!</p>
-        
+
         <p>С уважением,<br>
-        <strong>Команда ресторана</strong></p>
+        <strong>Команда ресторана Saffron</strong></p>
     </div>
     
     <div class="footer">
-        <p>Это автоматическое уведомление. Пожалуйста, не отвечайте на это письмо.</p>
         <p>Вы получили это письмо, потому что оставили заявку на бронирование на нашем сайте.</p>
         <p>© {% now "Y" %} [НАЗВАНИЕ РЕСТОРАНА]. Все права защищены.</p>
     </div>

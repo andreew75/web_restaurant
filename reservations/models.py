@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from model_utils import FieldTracker
 
 
 class Reservation(models.Model):
@@ -39,3 +40,5 @@ class Reservation(models.Model):
 
     def __str__(self):
         return f'{self.name} - {self.visit_date} {self.visit_time}'
+
+    tracker = FieldTracker(fields=['is_confirmed'])

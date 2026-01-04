@@ -73,11 +73,14 @@ class ReservationForm(forms.Form):
 
     visit_date = forms.DateField(
         widget=forms.DateInput(attrs={
-            'class': 'form-control',
-            'type': 'date',
+            'class': 'form-control js-date',
+            'type': 'text',
             'min': datetime.date.today().isoformat(),
             'data-label': 'Date',
-        }),
+            'placeholder': 'Date',
+        },
+            format='%d/%m/%Y'
+        ),
         label='Date',
         error_messages={
             'required': 'Select the date',
@@ -86,9 +89,10 @@ class ReservationForm(forms.Form):
 
     visit_time = forms.TimeField(
         widget=forms.TimeInput(attrs={
-            'class': 'form-control',
-            'type': 'time',
+            'class': 'form-control js-time',
+            'type': 'text',
             'data-label': 'Time',
+            'placeholder': 'Time',
         }),
         label='Time',
         error_messages={

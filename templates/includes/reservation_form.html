@@ -1,0 +1,123 @@
+<div class="modal fade reservation-popup" tabindex="-1" role="dialog" id="reservationModule">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i class="fa fa-times"></i>
+                </button>
+
+                <div class="row reservation">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="reservation-form mb-30 bg-white text-center">
+                            <form method="post" id="reservationForm" class="mb-0" novalidate>
+                                {% csrf_token %}
+
+                                <div class="row">
+                                    <!-- Количество гостей -->
+                                    <div class="col-xs-12 col-sm-12 col-md-4">
+                                        <div class="form-select">
+                                            <i class="fa fa-angle-down"></i>
+                                            {{ reservation_form.guests }}
+                                        </div>
+                                    </div>
+
+                                    <!-- Дата визита -->
+                                    <div class="col-xs-12 col-sm-12 col-md-4">
+                                        {{ reservation_form.visit_date }}
+                                    </div>
+
+                                    <!-- Время визита -->
+                                    <div class="col-xs-12 col-sm-12 col-md-4">
+                                        {{ reservation_form.visit_time }}
+                                    </div>
+
+                                    <!-- Имя -->
+                                    <div class="col-xs-12 col-sm-12 col-md-4">
+                                        {{ reservation_form.name }}
+                                    </div>
+
+                                    <!-- Email -->
+                                    <div class="col-xs-12 col-sm-12 col-md-4">
+                                        {{ reservation_form.email }}
+                                    </div>
+
+                                    <!-- Телефон -->
+                                    <div class="col-md-4">
+                                        {{ reservation_form.phone }}
+                                    </div>
+
+                                    <!-- Особые пожелания -->
+                                    <div class="col-xs-12 col-sm-12 col-md-12">
+                                        {{ reservation_form.special_request }}
+                                    </div>
+
+                                    <!-- Капча -->
+                                    <div class="col-xs-12 col-sm-12 col-md-12">
+                                        <div class="captcha-container mb-3"
+                                             style="margin-bottom: 30px; display: flex; justify-content: center">
+                                            {{ reservation_form.captcha }}
+                                        </div>
+                                    </div>
+
+                                    <!-- Кнопка отправки -->
+                                    <div class="col-xs-12 col-sm-12 col-md-12">
+                                        <button type="submit" class="btn btn--secondary btn--block">
+                                            Find Table
+                                        </button>
+                                    </div>
+
+                                    <!-- Сообщения об ошибках/успехе -->
+                                    <div class="col-xs-12 col-sm-12 col-md-12">
+                                        <div id="reservation-result" class="reservation-result mt-3"></div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Модальное окно о принятии брони--->
+            <div id="reservation-success-overlay" class="reservation-overlay d-none">
+                <div class="reservation-overlay-content">
+                    <h3 class="success-title" style="color: #c59d5f">Thank You!</h3><br>
+                    <h4 class="success-title">
+                        We have received your table reservation request.<br>
+                        You will soon receive a confirmation email,
+                        or a restaurant administrator will contact you.
+                    </h4>
+                    <p class="text-muted mt-3"><br>
+                        The window will close automatically in 5 seconds.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .reservation-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(255, 255, 255, 0.95);
+        border: #c59d5f 16px solid;
+        z-index: 1055; /* выше содержимого модалки */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 30px;
+    }
+
+    .reservation-overlay-content {
+        max-width: 500px;
+    }
+
+    #reservationModule .modal-content {
+        position: relative;
+    }
+
+    .reservation-overlay.d-none {
+        display: none !important;
+    }
+
+</style>

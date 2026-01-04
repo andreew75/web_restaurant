@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 import os
 from pathlib import Path
 
+import web_restaurant
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -45,6 +47,7 @@ INSTALLED_APPS = [
     'chefs.apps.ChefsConfig',
     'reservations.apps.ReservationsConfig',
     'django_recaptcha',
+    'orders.apps.OrdersConfig',
 ]
 
 MIDDLEWARE = [
@@ -70,7 +73,8 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'web_restaurant.context_processors.nav_active',
-                'web_restaurant.context_processors.reservation_form_context'
+                'web_restaurant.context_processors.reservation_form_context',
+                'web_restaurant.context_processors.cart',
             ],
         },
     },
@@ -117,8 +121,17 @@ LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
+USE_L10N = False
 
 USE_TZ = False
+
+DATE_FORMAT = 'd M Y'  # 1 Jan 2026
+
+# Формат времени
+TIME_FORMAT = 'H:i'    # 00:00
+
+# Формат даты и времени
+DATETIME_FORMAT = 'd M Y, H:i'  # 1 Jan 2026, 00:00
 
 
 # Static files (CSS, JavaScript, Images)
@@ -143,24 +156,36 @@ RECAPTCHA_PRIVATE_KEY = '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe'
 # Удалить после завершения разработки
 RECAPTCHA_TESTING = True
 SILENCED_SYSTEM_CHECKS = ['django_recaptcha.recaptcha_test_key_error']
-# Настройки email для разработки
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_HOST = 'localhost'
-EMAIL_PORT = 25
-DEFAULT_FROM_EMAIL = 'anline75@gmail.com'
-SERVER_EMAIL = 'noreply@gmail.com'
 
-# # Для реальной отправки через SMTP:
-# """
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'smtp.gmail.com'  # Или ваш SMTP сервер
-# EMAIL_PORT = 587
-# EMAIL_USE_TLS = True
-# EMAIL_HOST_USER = 'anline75@gmail.com'
-# EMAIL_HOST_PASSWORD = ''  # Для Gmail: пароль приложения
-# DEFAULT_FROM_EMAIL = 'restaurant@saffron.com'
-# """
+# # Для реальной отправки:
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'anline75@gmail.com'
+EMAIL_HOST_PASSWORD = 'cojj jgyx uewv pdia'  # Для Gmail: пароль приложения
+DEFAULT_FROM_EMAIL = 'anline75@gmail.com'
+
+# # Уведомления администратора
+ADMIN_EMAIL = 'kolman@tutamail.com'  # Email администратора
+# ADMIN_PHONE = '+79991234567'  # Телефон администратора для SMS
+# SEND_SMS_TO_ADMIN = False  # Включить SMS уведомления админу
+
+# Telegram настройки
+TELEGRAM_BOT_TOKEN = '8561976984:AAH065cp_3L-iP7aJDseP2Pol5rDhjkMliY'  # Токен бота
+TELEGRAM_CHAT_ID = '1634132658'  # ID чата/канала
 
 # Название сайта для email
 SITE_NAME = 'Saffron'
 SITE_URL = 'http://localhost:8000'  # Для продакшена измените на реальный домен
+
+# Настройки корзины
+CART_SESSION_ID = 'cart'
+
+# Настройки сессии (если еще не настроены)
+SESSION_COOKIE_AGE = 1209600  # 2 недели в секундах
+SESSION_SAVE_EVERY_REQUEST = True  # Обновлять сессию при каждом запросе
+
+# Настройки доставки
+FIXED_DELIVERY_COST = 5  # Фиксированная стоимость доставки
+FREE_DELIVERY_THRESHOLD = 100  # Порог бесплатной доставки

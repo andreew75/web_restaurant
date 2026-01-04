@@ -12781,3 +12781,168 @@ scroll-behavior: smooth;
 .order-cart {
 	width: 30px;
 }
+
+.cart-shiping-details {
+	text-align: center;
+	color: #282828;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 27px;
+    text-transform: capitalize
+}
+
+.total-cost-order {
+	display: flex;
+	justify-content: flex-end;
+	gap: 40px;
+	padding-right: 60px;
+}
+
+.send-sms {
+	display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+.field-sms-code {
+	width: 100px;
+    margin-bottom: 10px;
+	text-align: center;
+}
+
+.btn-send-sms {
+	width: auto;
+}
+
+.field-send-sms {
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Стилизация радио кнопок*/
+.form_radio {
+	margin-bottom: 10px;
+}
+.form-radio input[type=radio] {
+	display: none;
+}
+.form-radio label {
+	display: inline-block;
+	cursor: pointer;
+	position: relative;
+	padding-left: 25px;
+	margin-right: 0;
+	line-height: 18px;
+	user-select: none;
+}
+.form-radio label:before {
+	content: "";
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	position: absolute;
+	left: 0;
+	bottom: 1px;
+	background: url(/static/img/radio-2.png) 0 0 no-repeat;
+}
+
+/* Checked */
+.form-radio input[type=radio]:checked + label:before {
+	background: url(/static/img/radio-1.png) 0 0 no-repeat;
+}
+
+/* Hover */
+.form-radio label:hover:before {
+	filter: brightness(120%);
+}
+
+.cart-product-price,
+.cart-product-quantity,
+.cart-product-total {
+    min-width: 110px; /* Фиксированная минимальная ширина */
+    text-align: center;
+    white-space: nowrap; /* Не переносить текст */
+}
+
+.quantity-input {
+    width: 60px !important; /* Фиксированная ширина поля ввода */
+    text-align: center;
+}
+
+/* Предотвращаем сдвиги при обновлении */
+.price-updated {
+    display: inline-block;
+    padding: 2px 5px;
+    animation: priceUpdate 0.3s ease;
+}
+
+@keyframes priceUpdate {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+ .confirm-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.confirm-modal.hidden {
+    display: none;
+}
+
+.confirm-box {
+    background: #fff;
+    padding: 25px 30px;
+    border-radius: 8px;
+    max-width: 320px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+}
+
+.confirm-actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+/*Сообщение об успешном принятии заказа*/
+.order-confirmation-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.order-confirmation-modal.hidden {
+    display: none;
+}
+
+.confirmation-content {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+}
+
+.confirmation-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}

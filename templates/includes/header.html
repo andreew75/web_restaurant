@@ -57,110 +57,30 @@
             <div class="collapse navbar-collapse pull-right" id="navbar-collapse-1">
               <ul class="nav navbar-nav nav-pos-right navbar-left">
                 <li {% if current_url_namespace == 'gallery' and current_url_name == 'list' %}class="active"{% endif %}>
-                  <a class="menu-item" href="{% url 'gallery:list' %}">gallery</a>
+                    <a class="menu-item" href="{% url 'gallery:list' %}">gallery</a>
                 </li>
-                <!-- li end -->
                 <!-- Blog Menu-->
                 <li {% if current_url_namespace == 'blog' and current_url_name == 'list' %}class="active"{% endif %}>
-                  <a class="menu-item" href="{% url 'blog:list' %}">blog</a>
+                    <a class="menu-item" href="{% url 'blog:list' %}">blog</a>
                 </li>
-                <!-- li end -->
-
                 <li>
-
-    <div class="module-container pull-right">
-        <div class="module module-reservation">
-            <a class="btn-popup btn-popup-theme" data-toggle="modal" data-target="#reservationModule">
-                <i class="lnr lnr-users"></i>
-                <span class="hidden-sm hidden-xs">Reservation</span>
-            </a>
-
-            <div class="modal fade reservation-popup" tabindex="-1" role="dialog" id="reservationModule">
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-body">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <i class="fa fa-times"></i>
-                            </button>
-
-                            <div class="row reservation">
-                                <div class="col-xs-12 col-sm-12 col-md-12">
-                                    <div class="reservation-form mb-30 bg-white text-center">
-                                        <form method="post" id="reservationForm" class="mb-0" novalidate>
-                                            {% csrf_token %}
-
-                                            <div class="row">
-                                                <!-- Количество гостей -->
-                                                <div class="col-xs-12 col-sm-12 col-md-4">
-                                                    <div class="form-select">
-                                                        <i class="fa fa-angle-down"></i>
-                                                        {{ reservation_form.guests }}
-                                                    </div>
-                                                </div>
-
-                                                <!-- Дата визита -->
-                                                <div class="col-xs-12 col-sm-12 col-md-4">
-                                                    {{ reservation_form.visit_date }}
-                                                </div>
-
-                                                <!-- Время визита -->
-                                                <div class="col-xs-12 col-sm-12 col-md-4">
-                                                    {{ reservation_form.visit_time }}
-                                                </div>
-
-                                                <!-- Имя -->
-                                                <div class="col-xs-12 col-sm-12 col-md-4">
-                                                    {{ reservation_form.name }}
-                                                </div>
-
-                                                <!-- Email -->
-                                                <div class="col-xs-12 col-sm-12 col-md-4">
-                                                   {{ reservation_form.email }}
-                                                </div>
-
-                                                <!-- Телефон -->
-                                                <div class="col-md-4">
-                                                    {{ reservation_form.phone }}
-                                                </div>
-
-                                                <!-- Особые пожелания -->
-                                                <div class="col-xs-12 col-sm-12 col-md-12">
-                                                    {{ reservation_form.special_request }}
-                                                </div>
-
-                                                <!-- Капча -->
-                                                <div class="col-xs-12 col-sm-12 col-md-12">
-                                                    <div class="captcha-container mb-3" style="margin-bottom: 30px; display: flex; justify-content: center">
-                                                        {{ reservation_form.captcha }}
-                                                    </div>
-                                                </div>
-
-                                                <!-- Кнопка отправки -->
-                                                <div class="col-xs-12 col-sm-12 col-md-12">
-                                                    <button type="submit" class="btn btn--secondary btn--block">
-                                                        Find Table
-                                                    </button>
-                                                </div>
-
-                                                <!-- Сообщения об ошибках/успехе -->
-                                                <div class="col-xs-12 col-sm-12 col-md-12">
-                                                    <div id="reservation-result" class="reservation-result mt-3"></div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="module-container pull-right">
+                        <div class="module module-reservation">
+                            <a class="btn-popup btn-popup-theme" data-toggle="modal" data-target="#reservationModule">
+                                <i class="lnr lnr-users"></i>
+                                <span class="hidden-sm hidden-xs">Reservation</span>
+                            </a>
+                            {% include 'includes/reservation_form.html' %}
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
                 </li>
               <li>
-                <a class="menu-item" href="#"><img class="order-cart" src="{% static '/img/cart.png' %}" alt="cart"></a>
+                <a class="menu-item" style="width: 60px;" href="{% url 'orders:cart_detail' %}"><img class="order-cart"
+                src="{% static '/img/cart.png' %}" alt="cart">
+                {% if cart and not cart.is_empty %}
+                <span class="cart-count">{{ cart.get_item_count }}</span>
+                {% endif %}
+                </a>
               </li>
               </ul>
             </div>

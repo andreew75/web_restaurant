@@ -6,7 +6,7 @@
 .star-rating-fa-inputs {
   display: inline-block;
   direction: rtl;   /*Если хотите, чтобы 5 звезд были слева */
-  font-size: 2.5em; /* Размер иконок */
+  font-size: 2em; /* Размер иконок */
   /* color: #ccc; */ /* Это будет задаваться через fill в CSS */
   padding-bottom: 20px;
 }
@@ -29,7 +29,7 @@
 
 /* При наведении на звезду (label), подсветить ее и все звезды слева от нее */
 .star-rating-fa-inputs label.star-label-fa:hover .fa-solid.fa-star {
-  color: #ffc107; /* Цвет заполненной звезды */
+  color: #c5a85f; /* Цвет заполненной звезды */
 }
 /* Для сброса цвета у звезд справа при наведении */
 .star-rating-fa-inputs label.star-label-fa:hover ~ label.star-label-fa .fa-solid.fa-star {
@@ -43,9 +43,9 @@
 }
 /* Заполнить текущую выбранную звезду */
 .star-rating-fa-inputs input[type="radio"]:checked + label.star-label-fa .fa-solid.fa-star {
-  color: #ffc107;
+  color: #c5a85f;
 }
 /* Заполнить предыдущие звезды */
 .star-rating-fa-inputs input[type="radio"]:checked ~ label.star-label-fa .fa-solid.fa-star {
-  color: #ffc107;
+  color: #d5b35c;
 }

@@ -1,4 +1,5 @@
 from reservations.forms import ReservationForm
+from orders.cart import Cart
 
 
 # Активный пункт меню
@@ -24,4 +25,13 @@ def reservation_form_context(request):
     """
     return {
         'reservation_form': ReservationForm()
+    }
+
+
+def cart(request):
+    """
+    Контекстный процессор, который добавляет корзину в контекст всех шаблонов
+    """
+    return {
+        'cart': Cart(request)
     }

@@ -5,10 +5,6 @@ from django.views.decorators.http import require_POST
 from django.contrib import messages
 from .forms import ReservationForm
 from .models import Reservation
-import ssl
-
-# Отключаем проверку SSL для локальной разработки
-ssl._create_default_https_context = ssl._create_unverified_context
 
 
 @require_POST

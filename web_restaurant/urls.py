@@ -31,4 +31,8 @@ urlpatterns = [
     path('events/', include('events.urls', namespace='events')),
     path('gallery/', include('gallery.urls', namespace='gallery')),
     path('reservations/', include('reservations.urls')),
+    path('orders/', include('orders.urls', namespace='orders')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -166,4 +166,39 @@ function initPhotoUpload() {
     });
 
     console.log('Photo upload initialized successfully');
+
+    // Модальное окно отзыва
+
+    const popup = document.getElementById('simplePopup');
+
+    if (!popup) return;
+
+    const shouldShow = popup.dataset.show === '1';
+    const redirectUrl = popup.dataset.redirectUrl;
+
+    if (shouldShow) {
+        setTimeout(() => {
+            popup.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }, 100);
+
+        // авто-редирект через 5 сек
+        setTimeout(() => {
+            if (redirectUrl) {
+                window.location.href = redirectUrl;
+            }
+        }, 5000);
+    }
+
+    const okBtn = document.getElementById('popup-ok-btn');
+    if (okBtn) {
+        okBtn.addEventListener('click', () => {
+            popup.style.display = 'none';
+            document.body.style.overflow = 'auto';
+
+            if (redirectUrl) {
+                window.location.href = redirectUrl;
+            }
+        });
+    }
 }

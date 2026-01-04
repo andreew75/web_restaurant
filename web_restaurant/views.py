@@ -2,9 +2,7 @@ from django.shortcuts import render, redirect
 from menu.models import Category, MenuItem
 from reviews.models import Review
 from chefs.models import Chef
-from django.contrib import messages
 from reviews.forms import ReviewForm
-from django.http import JsonResponse
 
 
 def home(request):

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { background: #4CAF50; color: white; padding: 20px; text-align: center; }
+        .content { background: #f9f9f9; padding: 20px; border-radius: 0 0 5px 5px; }
+        .order-info { background: white; padding: 15px; margin: 15px 0; border-left: 4px solid #4CAF50; }
+        .items-table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        .items-table th, .items-table td { padding: 10px; text-align: left; border-bottom: 1px solid #ddd; }
+        .items-table th { background: #f2f2f2; }
+        .total { font-size: 1.2em; font-weight: bold; color: #4CAF50; }
+        .btn { display: inline-block; padding: 10px 20px; background: #4CAF50; color: white; text-decoration: none; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🆕 Новый заказ #{{ order_info.id_short }}</h1>
+            <p>{{ site_name }}</p>
+        </div>
+
+        <div class="content">
+            <div class="order-info">
+                <h2>Информация о заказе</h2>
+                <p><strong>Дата:</strong> {{ order_info.created_at }}</p>
+                <p><strong>Клиент:</strong> {{ order_info.customer_name }}</p>
+                <p><strong>Телефон:</strong> {{ order_info.phone }}</p>
+                <p><strong>Адрес доставки:</strong> {{ order_info.address }}</p>
+                <p><strong>Способ доставки:</strong> {{ order_info.delivery_method }}</p>
+                <p><strong>Способ оплаты:</strong> {{ order_info.payment_method }}</p>
+                <p><strong>Статус:</strong> {{ order_info.status }}</p>
+            </div>
+
+            <h3>Состав заказа ({{ order_info.items_count }} позиций):</h3>
+            <table class="items-table">
+                <thead>
+                    <tr>
+                        <th>Блюдо</th>
+                        <th>Количество</th>
+                        <th>Сумма</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in order.items.all %}
+                    <tr>
+                        <td>{{ item.dish_name }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.total_price }} ₽</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <div class="order-info">
+                <p><strong>Стоимость товаров:</strong> {{ order_info.total_cost }} ₽</p>
+                <p><strong>Скидка по купону:</strong> {{ order_info.discount }} ₽</p>
+                <p><strong>Стоимость доставки:</strong> {{ order_info.delivery_cost }} ₽</p>
+                <p class="total">ИТОГО К ОПЛАТЕ: {{ order_info.final_cost }} ₽</p>
+            </div>
+
+            <div style="text-align: center; margin-top: 30px;">
+                <a href="{{ site_url }}/admin/orders/order/{{ order.id }}/" class="btn">
+                    Перейти к заказу в админке
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

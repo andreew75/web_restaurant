@@ -24,6 +24,10 @@ class Review(models.Model):
         default='reviews_images/default.png',
         verbose_name='Фото автора'
     )
+    admin_notified = models.BooleanField(
+        default=False,
+        verbose_name='Администратор уведомлен'
+    )
     is_published = models.BooleanField(default=True, verbose_name='Опубликовано')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата обновления')
@@ -51,4 +55,3 @@ class Review(models.Model):
             stars_html += '<i class="fa fa-star-o"></i>'
 
         return stars_html
-

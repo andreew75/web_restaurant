@@ -1,112 +1,115 @@
 {% extends 'base.html' %}
 {% load static %}
-{#{% block css %}<link rel="stylesheet" href="{% static 'css/popup.css' %}">{% endblock %}#}
+
 {% block title %}Saffron | Elegant Restaurant & Cafe{% endblock %}
 
 {% block content %}
 
-
-<section id="reservation1" class="reservation bg-overlay bg-overlay-dark bg-parallax pt-90 pb-80" style="margin-top: -150px">
-    <div class="bg-section">
-        <img src="{% static 'img/bg_01.jpg' %}" alt="Background" />
-    </div>
-    <div class="container">
-        <div class="divider--shape-1up"></div>
-        <div class="row clearfix">
-            <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2" style="padding-top:100px ">
-                <div class="heading heading-1 mb-50 text-center">
-                    <p class="heading--subtitle">Were you satisfied?</p>
-                    <h2 class="heading--title text-white">Write Your Review</h2>
+    <section id="reservation1" class="reservation bg-overlay bg-overlay-dark bg-parallax pt-90 pb-80"
+             style="margin-top: -150px">
+        <div class="bg-section">
+            <img src="{% static 'img/bg_01.jpg' %}" alt="Background"/>
+        </div>
+        <div class="container">
+            <div class="divider--shape-1up"></div>
+            <div class="row clearfix">
+                <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2" style="padding-top:100px ">
+                    <div class="heading heading-1 mb-50 text-center">
+                        <p class="heading--subtitle">Were you satisfied?</p>
+                        <h2 class="heading--title text-white">Write Your Review</h2>
+                    </div>
                 </div>
             </div>
-        </div>
-        <!-- .row end -->
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1">
-                <div class="reservation-form box-shadow mb-30 bg-white text-center">
-                    <div class="reservation--dec">
-                        We hope you enjoy your visit to our restaurant. Our chefs look forward to receiving compliments on our delicious dishes. We are always happy to welcome you.
-                        <br>Thank you for choosing our restaurant, Saffron!
-                    </div>
-                    <form method="post" enctype="multipart/form-data" class="mb-0" id="reviewForm">
-                {% csrf_token %}
-
-                <div class="row">
-                    <!-- Рейтинг -->
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <h4>How many stars will you give us?</h4>
-                        <div class="review-rating-fa mb-4">
-                            <div class="star-rating-fa-inputs">
-                                {% for i in "54321" %}
-                                <input type="radio"
-                                       id="star-fa-{{ i }}"
-                                       name="rating"
-                                       value="{{ i }}"
-                                       {% if forloop.first %}checked{% endif %}>
-                                <label for="star-fa-{{ i }}" class="star-label-fa">
-                                    <i class="fa-solid fa-star"></i>
-                                </label>
-                                {% endfor %}
-                            </div>
-                            <!-- Ошибки поля рейтинга -->
-                            {% if form.rating.errors %}
-                            <div class="text-danger small">
-                                {{ form.rating.errors }}
-                            </div>
-                            {% endif %}
+            <!-- .row end -->
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1">
+                    <div class="reservation-form box-shadow mb-30 bg-white text-center">
+                        <div class="reservation--dec">
+                            We hope you enjoy your visit to our restaurant. Our chefs look forward to receiving
+                            compliments on our delicious dishes. We are always happy to welcome you.
+                            <br>Thank you for choosing our restaurant, Saffron!
                         </div>
-                    </div>
+                        <form method="post" enctype="multipart/form-data" class="mb-0" id="reviewForm">
+                            {% csrf_token %}
 
-                    <!-- Имя -->
-                    <div class="col-xs-12 col-sm-12 col-md-4">
-                        {{ form.first_name }}
-                        {% if form.first_name.errors %}
-                        <div class="text-danger small">
-                            {{ form.first_name.errors }}
-                        </div>
-                        {% endif %}
-                    </div>
+                            <div class="row">
+                                <!-- Рейтинг -->
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <h4>How many stars will you give us?</h4>
+                                    <div class="review-rating-fa mb-4">
+                                        <div class="star-rating-fa-inputs">
+                                            {% for i in "54321" %}
+                                                <input type="radio"
+                                                       id="star-fa-{{ i }}"
+                                                       name="rating"
+                                                       value="{{ i }}"
+                                                       {% if forloop.first %}checked{% endif %}>
+                                                <label for="star-fa-{{ i }}" class="star-label-fa">
+                                                    <i class="fa-solid fa-star"></i>
+                                                </label>
+                                            {% endfor %}
+                                        </div>
+                                        <!-- Ошибки поля рейтинга -->
+                                        {% if form.rating.errors %}
+                                            <div class="text-danger small">
+                                                {{ form.rating.errors }}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
 
-                    <!-- Фамилия -->
-                    <div class="col-xs-12 col-sm-12 col-md-4">
-                        {{ form.last_name }}
-                        {% if form.last_name.errors %}
-                        <div class="text-danger small">
-                            {{ form.last_name.errors }}
-                        </div>
-                        {% endif %}
-                    </div>
+                                <!-- Имя -->
+                                <div class="col-xs-12 col-sm-12 col-md-4">
+                                    {{ form.first_name }}
+                                    {% if form.first_name.errors %}
+                                        <div class="text-danger small">
+                                            {{ form.first_name.errors }}
+                                        </div>
+                                    {% endif %}
+                                </div>
 
-                    <!-- Email -->
-                    <div class="col-md-4">
-                        {{ form.email }}
-                        {% if form.email.errors %}
-                        <div class="text-danger small">
-                            {{ form.email.errors }}
-                        </div>
-                        {% endif %}
-                    </div>
+                                <!-- Фамилия -->
+                                <div class="col-xs-12 col-sm-12 col-md-4">
+                                    {{ form.last_name }}
+                                    {% if form.last_name.errors %}
+                                        <div class="text-danger small">
+                                            {{ form.last_name.errors }}
+                                        </div>
+                                    {% endif %}
+                                </div>
 
-                    <!-- Текст отзыва -->
-                    <div class="col-xs-12 col-sm-12 col-md-12 mt-3" style="line-height: 22px!important;">
-                        {{ form.text }}
-                        <div class="char-counter text-muted small text-end mt-1">
-                            <span id="charCount">0</span>/150 characters
-                        </div>
-                        {% if form.text.errors %}
-                        <div class="text-danger small">
-                            {{ form.text.errors }}
-                        </div>
-                        {% endif %}
-                    </div>
+                                <!-- Email -->
+                                <div class="col-md-4">
+                                    {{ form.email }}
+                                    {% if form.email.errors %}
+                                        <div class="text-danger small">
+                                            {{ form.email.errors }}
+                                        </div>
+                                    {% endif %}
+                                </div>
 
-                    <!-- Фото (опционально) -->
-                    <div class="col-xs-12 col-sm-12 col-md-12 mt-3 text-form-photo" style="margin-top: 20px">
-                        <label for="id_image" class="form-label">Your photo (optional)</label>
-                        {{ form.image }}
-                        <div class="upload-photo">
-                            <!-- Кнопка, которая меняет содержимое -->
-                            <label for="id_image" class="btn btn--primary btn--bordered" id="uploadButton" style="height: 55px;">
+                                <!-- Текст отзыва -->
+                                <div class="col-xs-12 col-sm-12 col-md-12 mt-3" style="line-height: 22px!important;">
+                                    {{ form.text }}
+                                    <div class="char-counter text-muted small text-end mt-1">
+                                        <span id="charCount">0</span>/150 characters
+                                    </div>
+                                    {% if form.text.errors %}
+                                        <div class="text-danger small">
+                                            {{ form.text.errors }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+                                <!-- Фото (опционально) -->
+                                <div class="col-xs-12 col-sm-12 col-md-12 mt-3 text-form-photo"
+                                     style="margin-top: 20px">
+                                    <label for="id_image" class="form-label">Your photo (optional)</label>
+                                    {{ form.image }}
+                                    <div class="upload-photo">
+                                        <!-- Кнопка, которая меняет содержимое -->
+                                        <label for="id_image" class="btn btn--primary btn--bordered" id="uploadButton"
+                                               style="height: 55px;">
                                 <span class="btn-content">
                                     <!-- Исходное состояние -->
                                     <span class="btn-default-primary">
@@ -122,86 +125,67 @@
                                         </span>
                                     </span>
                                 </span>
-                            </label>
-                            <p class="file-hint">JPG, PNG or GIF (Max 5MB)</p>
-                        </div>
-                        {% if form.image.errors %}
-                        <div class="text-danger small">
-                            {{ form.image.errors }}
-                        </div>
-                        {% endif %}
-                    </div>
+                                        </label>
+                                        <p class="file-hint">JPG, PNG or GIF (Max 5MB)</p>
+                                    </div>
+                                    {% if form.image.errors %}
+                                        <div class="text-danger small">
+                                            {{ form.image.errors }}
+                                        </div>
+                                    {% endif %}
+                                </div>
 
-                    <!-- Согласие -->
-                    <div class="col-xs-12 col-sm-12 col-md-12 mt-3">
-                        <div class="form-check">
-                            {{ form.agree }}
-                            <label class="form-check-label" for="{{ form.agree.id_for_label }}" style="margin-left: 5px">
-                                I agree to the <a href="#" data-bs-toggle="modal" data-bs-target="#terms-txt">Terms and Privacy Policy</a>
-                            </label>
-                        </div>
-                        {% if form.agree.errors %}
-                        <div class="text-danger small">
-                            {{ form.agree.errors }}
-                        </div>
-                        {% endif %}
-                    </div>
+                                <!-- Согласие -->
+                                <div class="col-xs-12 col-sm-12 col-md-12 mt-3" style="margin-top: 20px">
+                                    <div class="form-check">
+                                        {{ form.agree }}
+                                        <label class="form-check-label" for="{{ form.agree.id_for_label }}"
+                                               style="margin-left: 5px">
+                                            I agree to the <a href="#" data-bs-toggle="modal"
+                                                              data-bs-target="#terms-txt">Terms and Privacy Policy</a>
+                                        </label>
+                                    </div>
+                                    {% if form.agree.errors %}
+                                        <div class="text-danger small">
+                                            {{ form.agree.errors }}
+                                        </div>
+                                    {% endif %}
+                                </div>
 
-                    <!-- Кнопка отправки -->
-                    <div class="col-xs-12 col-sm-12 col-md-12 mt-4">
-                        <button type="submit" class="btn btn--secondary btn--block">
-                            send feedback
-                        </button>
+                                <!-- Кнопка отправки -->
+                                <div class="col-xs-12 col-sm-12 col-md-12 mt-4">
+                                    <button type="submit" class="btn btn--secondary btn--block">
+                                        send feedback
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- form end -->
                     </div>
+                    <!-- .contact-form end -->
                 </div>
-            </form>
-                    <!-- form end -->
-                </div>
-                <!-- .contact-form end -->
             </div>
+            <!-- .row end -->
+            <div class="divider--shape-1down"></div>
         </div>
-        <!-- .row end -->
-        <div class="divider--shape-1down"></div>
+
+    </section>
+
+    <div id="simplePopup" data-show="{{ show_modal|yesno:'1,0' }}" data-redirect-url="{% url 'home' %}"
+         style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:9999;">
+        <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:white; padding:40px; border-radius:10px; text-align:center; max-width:400px; width:90%;">
+            <div style="background:#c59d5f; color:white; width:60px; height:60px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:30px; font-weight:bold; margin:0 auto 20px;">
+                ✓
+            </div>
+            <h3 style="margin-bottom:15px;">Thank You!</h3>
+            <p style="margin-bottom:10px;">Your review has been submitted successfully.</p>
+            <p style="margin-bottom:20px;">It will be published after moderation.</p>
+            <button id="popup-ok-btn"
+                    style="background:#c59d5f; color:white; border:none; padding:12px 30px; border-radius:8px; font-size:16px; cursor:pointer;">
+                OK
+            </button>
+        </div>
     </div>
 
-</section>
-
-<div id="simplePopup" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:9999;">
-    <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:white; padding:40px; border-radius:10px; text-align:center; max-width:400px; width:90%;">
-        <div style="background:#c59d5f; color:white; width:60px; height:60px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:30px; font-weight:bold; margin:0 auto 20px;">✓</div>
-        <h3 style="margin-bottom:15px;">Thank You!</h3>
-        <p style="margin-bottom:10px;">Your review has been submitted successfully.</p>
-        <p style="margin-bottom:20px;">It will be published after moderation.</p>
-        <button onclick="window.location.href='{% url 'home' %}'"
-                style="background:#c59d5f; color:white; border:none; padding:12px 30px; border-radius:8px; font-size:16px; cursor:pointer;">
-            OK
-        </button>
-    </div>
-</div>
-
-<script>
-{% if show_modal %}
-    document.addEventListener('DOMContentLoaded', function() {
-        setTimeout(function() {
-            document.getElementById('simplePopup').style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        }, 300);
-    });
-{% endif %}
-
-// Функция для закрытия попапа (на случай если захотите добавить крестик)
-function closePopup() {
-    document.getElementById('simplePopup').style.display = 'none';
-    document.body.style.overflow = 'auto'; // Восстанавливаем прокрутку
-}
-
-// Автоматический редирект через 5 секунд (опционально)
-{% if show_modal %}
-setTimeout(function() {
-    window.location.href = "{% url 'home' %}";
-}, 5000); // 5 секунд
-{% endif %}
-</script>
-
-<script src="{% static 'js/reviews.js' %}"></script>
+    <script src="{% static 'js/reviews.js' %}"></script>
 {% endblock %}

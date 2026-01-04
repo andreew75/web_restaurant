@@ -10,8 +10,8 @@ class GalleryImage(models.Model):
     order = models.IntegerField(default=0, verbose_name="Order")
 
     class Meta:
-        verbose_name = "Gallery Image"
-        verbose_name_plural = "Gallery Images"
+        verbose_name = "Галерея"
+        verbose_name_plural = "Галерея"
         ordering = ['order', '-created_at']
 
     def __str__(self):

@@ -162,18 +162,18 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'anline75@gmail.com'
-EMAIL_HOST_PASSWORD = 'cojj jgyx uewv pdia'  # Для Gmail: пароль приложения
-DEFAULT_FROM_EMAIL = 'anline75@gmail.com'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''  # Для Gmail: пароль приложения
+DEFAULT_FROM_EMAIL = ''
 
 # # Уведомления администратора
-ADMIN_EMAIL = 'kolman@tutamail.com'  # Email администратора
+ADMIN_EMAIL = ''  # Email администратора
 # ADMIN_PHONE = '+79991234567'  # Телефон администратора для SMS
 # SEND_SMS_TO_ADMIN = False  # Включить SMS уведомления админу
 
 # Telegram настройки
-TELEGRAM_BOT_TOKEN = '8561976984:AAH065cp_3L-iP7aJDseP2Pol5rDhjkMliY'  # Токен бота
-TELEGRAM_CHAT_ID = '1634132658'  # ID чата/канала
+TELEGRAM_BOT_TOKEN = ''  # Токен бота
+TELEGRAM_CHAT_ID = ''  # ID чата/канала
 
 # Название сайта для email
 SITE_NAME = 'Saffron'
